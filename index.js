@@ -14,7 +14,7 @@ inquirer
         message: 'Welcome to README-Maker! We save you time in creating your readme documentation so you can spend more time on the important stuff! Let\'s get started. What is the name of your application?',
    }
    //Tagline (tagline)
-   {
+   ,{
         type: 'input',
         name: 'tagline',
         message: 'What is your application\'s tagline or flavor text? (type SKIP to skip):',
@@ -32,7 +32,7 @@ inquirer
         message: 'What is your application\'s URL?',
     }
     //About
-    {
+    ,{
         type: 'input',
         name: 'link',
         message: 'What is your application\'s URL?',
