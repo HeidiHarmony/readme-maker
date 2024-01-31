@@ -1,5 +1,5 @@
 # README-Maker
-## Saving you time for the good stuff... coding, of course!
+## We save you time in creating your readme documentation so you can spend more time on the important stuff!
 
 ### Find it here: 
 
