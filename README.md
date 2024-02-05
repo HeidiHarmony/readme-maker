@@ -2,16 +2,16 @@
 
 ## We save you time in creating your readme documentation so you can spend more time on the important stuff
 
-### Find it here
+## Table of Contents
 
-- About
-- Features
-- Documentation
-- Future Development
-- Report Issues
-- How to Contribute
-- License
-- Author
+- [About](#about)
+- [Features](#features)
+- [Documentation](#documentation)
+- [Future Development](#future-development)
+- [Report Issues](#report-issues)
+- [How to Contribute](#how-to-contribute)
+- [License](#license)
+- [Author](#author)
 
 ## About
 
@@ -19,6 +19,9 @@
 - Why use README-Maker (What problem does it solve)
 - How README-Maker Works
 - What I learned along the way
+- Tools and References
+    Bootcamp Xpert
+    Co-Pilot
 - Challenges
 
 ## Features
@@ -36,6 +39,8 @@
 ### Getting Started
 
 ## Future Development
+
+One planned feature is to allow the user to choose their own headings and identify those headings using regex to create a more customized template and table of contents.
 
 ## Report Issues
 
