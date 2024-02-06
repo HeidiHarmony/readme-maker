@@ -62,7 +62,7 @@ inquirer
     {
         type: 'input',
         name: 'installation',
-        message: 'How do you install your application?',
+        message: 'How is your application installed?',
     },
 
     //Dependencies
@@ -90,7 +90,13 @@ inquirer
     {
         type: 'input',
         name: 'dependenciesOther',
-        message: 'Please list any other dependencies you have:',
+        message: 'Please list any other dependencies you have: (type SKIP to skip)',
+        validate: function (input) {
+            if (input.toLowerCase() === 'skip') {
+              return true; // Skip the question
+            }
+            return input !== '' || 'Please enter a value or "skip"';
+            },
     },
     //Getting Started
     {
@@ -103,7 +109,7 @@ inquirer
         type: 'editor',
         name: 'faq',
         message: 'What are some frequently asked questions about your application?',
-        default: 'Q: \nA: \n\nQ: \nA: \n\nQ: \nA: \n\n',
+        default: 'Q: \nA: \n\nQ: \nA: \n\nQ: \nA:',
     },
     //Tests
     {
@@ -146,11 +152,12 @@ inquirer
         name: 'license',
         message: 'What license are you using for your application?',
         choices: [
-            { name: 'MIT' },
-            { name: 'GNU' },
-            { name: 'Apache' },
-            { name: 'Unlicense' },
-            { name: 'Other' } //Custom input
+            { name: 'MIT', description: 'A permissive license that is short and to the point. It lets people do anything they want as long as they provide appropriate attribution and don\’t hold you liable.' },
+            { name: 'GNU', description: 'A copyleft license that ensures the software remains free and open-source, and any modifications or derivatives are also licensed under the GPL' },
+            { name: 'Apache', description: 'A permissive license whose main conditions require preservation of copyright and license' },
+            { name: 'Unlicense', description: 'A public domain dedication intended to allow reuse of code with minimal restrictions' },
+            { name: 'Other' },
+            { name: 'None', description: 'No license. Choose this option if you do not want to include a license with your application.' }
         ],
     },
     {
@@ -210,15 +217,17 @@ inquirer
     })
     // function to generate the README file
         function generateReadme(answers) {
+            const licenseType = answers.license.toLowerCase() + answers.licenseOther.toLowerCase();
             return `# ${answers['app-name']}\n
             ${answers.tagline}\n
-            ## Table of Contents \n
+            [![License](https://img.shields.io/badge/License-${licenseType}-blue.svg)](#) \n
             ${generateToC(answers)}\n
-            ## About\n
+            ## Description\n
+            ### About\n
             ${answers.about}\n
-            ## Features\n
+            ### Features\n
             ${answers.features}\n
-            ## Watch ${answers['app-name']} in Action\n
+            ### Watch ${answers['app-name']} in Action\n
             ![Media](${answers.media})\n
             ## Documentation\n
             ### Installation\n
@@ -226,7 +235,7 @@ inquirer
             ### Dependencies\n
             ${answers.dependenciesCommon.join(', ')}
             ${answers.dependenciesOther}\n
-            ### Getting Started\n
+            ### Usage: Getting Started\n
             ${answers.usage}\n
             ### Frequently Asked Questions\n
             ${answers.faq.trim()}\n
@@ -257,7 +266,7 @@ inquirer
             `;
         };
 function generateToC(answers) {
-    return `## Table of Contents
+    return `## Table of Contents\n
     1. [About](#about)
     2. [Features](#features)
     3. [Media](#media)
@@ -279,28 +288,23 @@ function generateToC(answers) {
     function displayLicenseDescription(answers) {
         let description = '';
         const licenseLink = `https://choosealicense.com/licenses/${answers.license.toLowerCase()}`;
-        const licenseBadge = `![License](https://img.shields.io/badge/License-${answers.license}-blue.svg)`;
             switch (answers.license) {
                 case 'MIT':
-                    return "MIT License\nA short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.";
+                    return "MIT License\nA short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.\n" + licenseLink;
                 case 'GNU':
-                    return "GNU License\nA copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms.";
+                    return "GNU License\nA copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms.\n" + licenseLink;
                 case 'Apache':
-                    return "Apache License\nA permissive license whose main conditions require preservation of copyright and license";
+                    return "Apache License\nA permissive license whose main conditions require preservation of copyright and license.\n" + licenseLink;
                 case 'Unlicense':
-                    return "Unlicense\nA public domain dedication intended to allow reuse of code with minimal restrictions.";
-            case 'Other':
-                return `Other
-                ${answers.licenseOther}`;
+                    return "Unlicense\nA public domain dedication intended to allow reuse of code with minimal restrictions.\n" + licenseLink;
+                case 'Other':
+                    return `Other: ${answers.licenseOther}`;
+                case 'None': 
+                    return "No license. All rights reserved.";
         }
-            return licenseBadge + description + licenseLink;
+            return description + licenseLink;
     }
     
-
-
-
-
-
 
 // TODO: Create a function to initialize app
 //function init() {}
