@@ -10,215 +10,203 @@ function initializify() {
   initializify();
   
 // TODO: Create an array of questions for user input
-var questions = [];
-
-inquirer
-    .prompt ([
+var questions = [
 //Name of App (app-name)
-    { 
-        type: 'input',
-        name: 'appName',
-        message: 'Welcome to README-Maker! We save you time in creating your readme documentation so you can spend more time on the important stuff! Let\'s get started. What is the name of your application?',
-   },
-   //Tagline (tagline)
-   {
-        type: 'input',
-        name: 'tagline',
-        message: 'What is your application\'s tagline or flavor text? (type SKIP to skip):',
-        validate: function (input) {
-            if (input.toLowerCase() === 'skip') {
-              return true; // Skip the question
-            }
-            return input !== '' || 'Please enter a value or "skip"';
-            }
-    },
+{ 
+    type: 'input',
+    name: 'appName',
+    message: 'Welcome to README-Maker! We save you time in creating your readme documentation so you can spend more time on the important stuff! Let\'s get started. What is the name of your application?',
+},
+//Tagline (tagline)
+{
+    type: 'input',
+    name: 'tagline',
+    message: 'What is your application\'s tagline or flavor text? (type SKIP to skip):',
+    validate: function (input) {
+        if (input.toLowerCase() === 'skip') {
+          return true; // Skip the question
+        }
+        return input !== '' || 'Please enter a value or "skip"';
+        }
+},
 //Link to deployed application
-    {
-        type: 'input',
-        name: 'link',
-        message: 'What is your application\'s URL?',
-    },
+{
+    type: 'input',
+    name: 'link',
+    message: 'What is your application\'s URL?',
+},
 //About
-    {
-        type: 'input',
-        name: 'about',
-        message: 'What is your application about? What probem does it solve? What is its purpose?',
-    },
+{
+    type: 'input',
+    name: 'about',
+    message: 'What is your application about? What probem does it solve? What is its purpose?',
+},
 //Features
-    {
-        type: 'input',
-        name: 'features',
-        message: 'What are the main features of your application?',
-    },
+{
+    type: 'input',
+    name: 'features',
+    message: 'What are the main features of your application?',
+},
 //Media
-    {
-        type: 'input',
-        name: 'media',
-        message: 'Please provide a link to a screenshot or video of your application:',
-    },
+{
+    type: 'input',
+    name: 'media',
+    message: 'Please provide a link to a screenshot or video of your application:',
+},
 //Documentation
 
-    //Installation
-    {
-        type: 'input',
-        name: 'installation',
-        message: 'How is your application installed?',
-    },
+//Installation
+{
+    type: 'input',
+    name: 'installation',
+    message: 'How is your application installed?',
+},
 
-    //Dependencies
-    {
-        type: 'checkbox',
-        name: 'dependenciesCommon',
-        message: 'Do you require any of the following dependencies? (You can add anything not shown here in the next question)',
-        choices: [
-            { name: 'None'},
-            { name: 'fs' },
-            { name: 'Express' },
-            { name: 'React' },
-            { name: 'Inquirer' },
-            { name: 'Mongoose' },
-            { name: 'Axios' },
-            { name: 'Sequelize' },
-            { name: 'Dotenv' },
-            { name: 'bcrypt' },
-            { name: 'body-parser' },
-            { name: 'jsonwebtoken' },
-            { name: 'nodemailer' },
-            { name: 'multer' },
-        ]
-    },
-    {
-        type: 'input',
-        name: 'dependenciesOther',
-        message: 'Please list any other dependencies you have: (type SKIP to skip)',
-        validate: function (input) {
-            if (input.toLowerCase() === 'skip') {
-              return true; // Skip the question
-            }
-            return input !== '' || 'Please enter a value or "skip"';
-            },
-    },
-    //Getting Started
-    {
-        type: 'input',
-        name: 'usage',
-        message: 'What usage instructions do you have for your application?',
-    },
-    //Frequently Asked Questions
-    {
-        type: 'editor',
-        name: 'faq',
-        message: 'What are some frequently asked questions about your application?',
-        default: 'Q: \nA: \n\nQ: \nA: \n\nQ: \nA:',
-    },
-    //Tests
-    {
-        type: 'input',
-        name: 'testFrameworks',
-        message: 'What frameworks have been used to test your application? (type SKIP to skip)',
-        validate: function (input) {
-            if (input.toLowerCase() === 'skip') {
-              return true; // Skip the question
-            }
-            return input !== '' || 'Please enter a value or "skip"';
-            }
-    },
-    {
-        type: 'editor',
-        name: 'tests',
-        message: 'What else does the user need to know about testing? Possible topics include: test set up, structue, how to run, coverage, results, etc.',
-    },
-//Plans for future development
-    {
-        type: 'input',
-        name: 'future',
-        message: 'What are your plans for future development?',
-    },
-//Report Issues
-    {
-        type: 'input',
-        name: 'issues',
-        message: 'How can users report issues?',
-    },
-//How to contribute
-    {
-        type: 'input',
-        name: 'contribute',
-        message: 'How can other coders contribute to your application?',
-    },
-//License
-    {
-        type: 'list',
-        name: 'license',
-        message: 'What license are you using for your application?',
-        choices: [
-            { name: 'MIT', description: 'A permissive license that is short and to the point. It lets people do anything they want as long as they provide appropriate attribution and don\’t hold you liable.' },
-            { name: 'GNU', description: 'A copyleft license that ensures the software remains free and open-source, and any modifications or derivatives are also licensed under the GPL' },
-            { name: 'Apache', description: 'A permissive license whose main conditions require preservation of copyright and license' },
-            { name: 'Unlicense', description: 'A public domain dedication intended to allow reuse of code with minimal restrictions' },
-            { name: 'Other' },
-            { name: 'None', description: 'No license. Choose this option if you do not want to include a license with your application.' }
-        ],
-    },
-    {
-        type: 'input',
-        name: 'licenseOther',
-        when: (answers) => answers.license === 'Other', //Only prompts if 'Other' was selected
-        message: 'Please enter the name of your custom license:',
-    },
-//Author
-    //Name
-    {
-        type: 'input',
-        name: 'authorName',
-        message: 'What is your name?',
-    },
-    //GitHub
-    {
-        type: 'input',
-        name: 'authorGitHub',
-        message: 'What is your GitHub username?',
-    },
-    //Email
-    {
-        type: 'input',
-        name: 'authorEmail',
-        message: 'What is your email address?',
-    },
-    //LinkedIn
-    {
-        type: 'input',
-        name: 'authorLinkedIn',
-        message: 'What is your LinkedIn profile URL?',
-    },
-    //Portfolio
-    {
-        type: 'input',
-        name: 'authorPortfolio',
-        message: 'What is your portfolio URL?',
-    },
-    //About Author
-    {
-        type: 'input',
-        name: 'authorAbout',
-        message: 'What would you like people to know about you?',
-    },
-    ])
-
-    function licenseTypeConstructor(answers) {
-        if (answers.license !== license.name.other) {
-            licenseType = answers.license.toLowerCase();
-        } else {
-            licenseType = answers.licenseOther.toLowerCase();
+//Dependencies
+{
+    type: 'checkbox',
+    name: 'dependenciesCommon',
+    message: 'Do you require any of the following dependencies? (You can add anything not shown here in the next question)',
+    choices: [
+        { name: 'None'},
+        { name: 'fs' },
+        { name: 'Express' },
+        { name: 'React' },
+        { name: 'Inquirer' },
+        { name: 'Mongoose' },
+        { name: 'Axios' },
+        { name: 'Sequelize' },
+        { name: 'Dotenv' },
+        { name: 'bcrypt' },
+        { name: 'body-parser' },
+        { name: 'jsonwebtoken' },
+        { name: 'nodemailer' },
+        { name: 'multer' },
+    ]
+},
+{
+    type: 'input',
+    name: 'dependenciesOther',
+    message: 'Please list any other dependencies you have: (type SKIP to skip)',
+    validate: function (input) {
+        if (input.toLowerCase() === 'skip') {
+          return true; // Skip the question
         }
-    
-        return licenseType;
-    }
+        return input !== '' || 'Please enter a value or "skip"';
+        },
+},
+//Getting Started
+{
+    type: 'input',
+    name: 'usage',
+    message: 'What usage instructions do you have for your application?',
+},
+//Frequently Asked Questions
+{
+    type: 'editor',
+    name: 'faq',
+    message: 'What are some frequently asked questions about your application?',
+    default: 'Q: \nA: \n\nQ: \nA: \n\nQ: \nA:',
+},
+//Tests
+{
+    type: 'input',
+    name: 'testFrameworks',
+    message: 'What frameworks have been used to test your application? (type SKIP to skip)',
+    validate: function (input) {
+        if (input.toLowerCase() === 'skip') {
+          return true; // Skip the question
+        }
+        return input !== '' || 'Please enter a value or "skip"';
+        }
+},
+{
+    type: 'editor',
+    name: 'tests',
+    message: 'What else does the user need to know about testing? Possible topics include: test set up, structue, how to run, coverage, results, etc.',
+},
+//Plans for future development
+{
+    type: 'input',
+    name: 'future',
+    message: 'What are your plans for future development?',
+},
+//Report Issues
+{
+    type: 'input',
+    name: 'issues',
+    message: 'How can users report issues?',
+},
+//How to contribute
+{
+    type: 'input',
+    name: 'contribute',
+    message: 'How can other coders contribute to your application?',
+},
+//License
+{
+    type: 'list',
+    name: 'license',
+    message: 'What license are you using for your application?',
+    choices: [
+        { name: 'MIT', description: 'A permissive license that is short and to the point. It lets people do anything they want as long as they provide appropriate attribution and don\’t hold you liable.' },
+        { name: 'GNU', description: 'A copyleft license that ensures the software remains free and open-source, and any modifications or derivatives are also licensed under the GPL' },
+        { name: 'Apache', description: 'A permissive license whose main conditions require preservation of copyright and license' },
+        { name: 'Unlicense', description: 'A public domain dedication intended to allow reuse of code with minimal restrictions' },
+        { name: 'Other' },
+        { name: 'None', description: 'No license. Choose this option if you do not want to include a license with your application.' }
+    ],
+},
+{
+    type: 'input',
+    name: 'licenseOther',
+    when: (answers) => answers.license === 'Other', //Only prompts if 'Other' was selected
+    message: 'Please enter the name of your custom license:',
+},
+//Author
+//Name
+{
+    type: 'input',
+    name: 'authorName',
+    message: 'What is your name?',
+},
+//GitHub
+{
+    type: 'input',
+    name: 'authorGitHub',
+    message: 'What is your GitHub username?',
+},
+//Email
+{
+    type: 'input',
+    name: 'authorEmail',
+    message: 'What is your email address?',
+},
+//LinkedIn
+{
+    type: 'input',
+    name: 'authorLinkedIn',
+    message: 'What is your LinkedIn profile URL?',
+},
+//Portfolio
+{
+    type: 'input',
+    name: 'authorPortfolio',
+    message: 'What is your portfolio URL?',
+},
+//About Author
+{
+    type: 'input',
+    name: 'authorAbout',
+    message: 'What would you like people to know about you?',
+},
+];
 
-    licenseTypeConstructor(answers);
+inquirer
+    .prompt(questions)
 
     // function to write the README file
-    inquirer
+
     .then((answers) => {
         const readme = generateReadme(answers);
         const outputDir = 'readme-maker-output';
@@ -229,6 +217,14 @@ inquirer
         }); // Remove the extra closing parenthesis here
     })
 
+    .catch((error) => {
+        if (error.isTtyError) {
+            console.log('Prompt couldn\'t be rendered in the current environment');
+        } else {   
+            console.log('An error occurred:', error);
+        }
+    });
+
     // function to generate the README file
         function generateReadme(answers) {
             const licenseBadge = `![License](https://img.shields.io/badge/license-${licenseType}-blue.svg)`;
@@ -236,6 +232,7 @@ inquirer
                         ${answers.tagline}\n
                         ${licenseBadge}\n
                         ## Description\n
+                        ${generateToC(answers)}\n
                         ### About\n
                         ${answers.about}\n
                         ### Features\n
@@ -320,10 +317,15 @@ inquirer
         }
             return description + licenseLink;
     }
+
+    function licenseTypeConstructor(answers) {
+        if (answers.license !== license.name.other) {
+            licenseType = answers.license.toLowerCase();
+        } else {
+            licenseType = answers.licenseOther.toLowerCase();
+        }
     
+        return licenseType;
+    }
 
-// TODO: Create a function to initialize app
-//function init() {}
-
-// Function call to initialize app
-//init();
+    licenseTypeConstructor(answers);
