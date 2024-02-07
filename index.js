@@ -6,21 +6,21 @@ function initializify() {
     console.log('Initializing Node.js application...');
   }
   
-  // Call the initializeApp function to initialize your application
+  // Calling the initializify function to initialize the application
   initializify();
   
-// TODO: Create an array of questions for user input
+// An array of questions for user input
 var questions = [];
 
 inquirer
     .prompt ([
-//Name of App (app-name)
+//Name of App (appName)
     { 
         type: 'input',
-        name: 'app-name',
+        name: 'appName',
         message: 'Welcome to README-Maker! We save you time in creating your readme documentation so you can spend more time on the important stuff! Let\'s get started. What is the name of your application?',
    },
-   //Tagline (tagline)
+//Tagline (tagline)
    {
         type: 'input',
         name: 'tagline',
@@ -58,14 +58,14 @@ inquirer
     },
 //Documentation
 
-    //Installation
+//Installation
     {
         type: 'input',
         name: 'installation',
         message: 'How is your application installed?',
     },
 
-    //Dependencies
+//Dependencies
     {
         type: 'checkbox',
         name: 'dependenciesCommon',
@@ -98,20 +98,20 @@ inquirer
             return input !== '' || 'Please enter a value or "skip"';
             },
     },
-    //Getting Started
+//Getting Started
     {
         type: 'input',
         name: 'usage',
         message: 'What usage instructions do you have for your application?',
     },
-    //Frequently Asked Questions
+//Frequently Asked Questions
     {
         type: 'editor',
         name: 'faq',
         message: 'What are some frequently asked questions about your application?',
         default: 'Q: \nA: \n\nQ: \nA: \n\nQ: \nA:',
     },
-    //Tests
+//Tests
     {
         type: 'input',
         name: 'testFrameworks',
@@ -173,31 +173,31 @@ inquirer
         name: 'authorName',
         message: 'What is your name?',
     },
-    //GitHub
+//GitHub
     {
         type: 'input',
         name: 'authorGitHub',
         message: 'What is your GitHub username?',
     },
-    //Email
+//Email
     {
         type: 'input',
         name: 'authorEmail',
         message: 'What is your email address?',
     },
-    //LinkedIn
+//LinkedIn
     {
         type: 'input',
         name: 'authorLinkedIn',
         message: 'What is your LinkedIn profile URL?',
     },
-    //Portfolio
+//Portfolio
     {
         type: 'input',
         name: 'authorPortfolio',
         message: 'What is your portfolio URL?',
     },
-    //About Author
+//About Author
     {
         type: 'input',
         name: 'authorAbout',
@@ -218,7 +218,7 @@ inquirer
     // function to generate the README file
         function generateReadme(answers) {
             const licenseType = answers.license.toLowerCase() + answers.licenseOther.toLowerCase();
-            return `# ${answers['app-name']}\n
+            return `# ${answers['appName']}\n
             ${answers.tagline}\n
             [![License](https://img.shields.io/badge/License-${licenseType}-blue.svg)](#) \n
             ${generateToC(answers)}\n
@@ -227,7 +227,7 @@ inquirer
             ${answers.about}\n
             ### Features\n
             ${answers.features}\n
-            ### Watch ${answers['app-name']} in Action\n
+            ### Watch ${answers['appName']} in Action\n
             ![Media](${answers.media})\n
             ## Documentation\n
             ### Installation\n
