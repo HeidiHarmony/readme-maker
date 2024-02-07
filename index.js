@@ -2,25 +2,15 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-function initializify() {
-    console.log('Initializing Node.js application...');
-  }
-  
-  // Call the initializeApp function to initialize your application
-  initializify();
-  
 // TODO: Create an array of questions for user input
-var questions = [];
-
-inquirer
-    .prompt ([
+var questions = [
 //Name of App (app-name)
     { 
         type: 'input',
         name: 'appName',
         message: 'Welcome to README-Maker! We save you time in creating your readme documentation so you can spend more time on the important stuff! Let\'s get started. What is the name of your application?',
    },
-   //Tagline (tagline)
+//Tagline (tagline)
    {
         type: 'input',
         name: 'tagline',
@@ -202,10 +192,17 @@ inquirer
         type: 'input',
         name: 'authorAbout',
         message: 'What would you like people to know about you?',
-    },
-    ])
+    }
+    ];
 
-    function licenseTypeConstructor(answers) {
+    function initializify() {
+        console.log('Initializing Node.js application...');
+      }
+      
+      // Call the initializeApp function to initialize your application
+      initializify();
+
+      function licenseTypeConstructor(answers) {
         if (answers.license !== license.name.other) {
             licenseType = answers.license.toLowerCase();
         } else {
@@ -217,93 +214,29 @@ inquirer
 
     licenseTypeConstructor(answers);
 
-    // function to write the README file
-    inquirer
-    .then((answers) => {
-        const readme = generateReadme(answers);
-        const outputDir = 'readme-maker-output';
-        fs.mkdirSync(outputDir, { recursive: true });
-        fs.writeFile(`${outputDir}/README.md`, readme, (err) => {
-            if (err) throw err;
-            console.log('Your README file has been created successfully!');
-        }); // Remove the extra closing parenthesis here
-    })
+    function generateToC(answers) {
+        return `## Table of Contents
+    1. [About](#about)
+    2. [Features](#features)
+    3. [Media](#media)
+    4. [Documentation](#documentation)
+        1. [Installation](#installation)
+        2. [Dependencies](#dependencies)
+        3. [Getting Started](#usage)
+        4. [Frequently Asked Questions](#faq)
+        5. [Tests](#tests)
+    5. [Plans for Future Development](#future)
+    6. [Report Issues](#issues)
+    7. [How to Contribute](#contribute)
+    8. [License](#license)
+    9. [Author](#author)`;
+    }
 
-    // function to generate the README file
-        function generateReadme(answers) {
-            const licenseBadge = `![License](https://img.shields.io/badge/license-${licenseType}-blue.svg)`;
-                        `${answers.appName}\n
-                        ${answers.tagline}\n
-                        ${licenseBadge}\n
-                        ## Description\n
-                        ### About\n
-                        ${answers.about}\n
-                        ### Features\n
-                        ${answers.features}\n
-                        ### Watch ${answers['app-name']} in Action\n
-                        ![Media](${answers.media})\n
-                        ## Documentation\n
-                        ### Installation\n
-                        ${answers.installation}\n
-                        ### Dependencies\n
-                        ${answers.dependenciesCommon.join(', ')}
-                        ${answers.dependenciesOther}\n
-                        ### Usage: Getting Started\n
-                        ${answers.usage}\n
-                        ### Frequently Asked Questions\n
-                        ${answers.faq.trim()}\n
-                        If you have other questions, please contact me on github or by email.\n
-                        https://github.com/${answers.authorGitHub} or ${answers.authorEmail}\n
-                        ### Tests\n
-                        ${answers.testFrameworks}
-                        ${answers.tests}\n
-                        ## Plans for Future Development\n
-                        ${answers.future}\n
-                        ## Report Issues\n
-                        ${answers.issues}\n
-                        ## How to Contribute\n
-                        ${answers.contribute}\n
-                        ## License\n
-                        ${displayLicenseDescription(answers)}\n
-                        ## Author\n
-                        ### Name\n
-                        ${answers.authorName}\n
-                        ### GitHub\n
-                        ${answers.authorGitHub}\n
-                        ### Email\n
-                        ${answers.authorEmail}\n
-                        ### LinkedIn\n
-                        ${answers.authorLinkedIn}\n
-                        ### Portfolio\n
-                        ${answers.authorPortfolio}\n
-                        ### About Author\n
-                        ${answers.authorAbout.trim()}\n
-                        `;
-                    }
-                    
-            function generateToC(answers) {
-                return `## Table of Contents\n
-                1. [About](#about)
-                2. [Features](#features)
-                3. [Media](#media)
-                4. [Documentation](#documentation)
-                    1. [Installation](#installation)
-                    2. [Dependencies](#dependencies)
-                    3. [Getting Started](#usage)
-                    4. [Frequently Asked Questions](#faq)
-                    5. [Tests](#tests)
-                5. [Plans for Future Development](#future)
-                6. [Report Issues](#issues)
-                    7. [How to Contribute](#contribute)
-                    8. [License](#license)
-                    9. [Author](#author)`;
-                }
+     //License Description Function
 
-    //License Description Function
-
-    function displayLicenseDescription(answers) {
-        let description = '';
+     function displayLicenseDescription(answers) {
         const licenseLink = `https://choosealicense.com/licenses/${answers.license.toLowerCase()}`;
+        let description = '';
             switch (answers.license) {
                 case 'MIT':
                     return "MIT License\nA short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.\n" + licenseLink;
@@ -320,10 +253,74 @@ inquirer
         }
             return description + licenseLink;
     }
-    
 
-// TODO: Create a function to initialize app
-//function init() {}
+     // function to generate the README file
+     function generateReadme(answers, licenseType, generateToC, displayLicenseDescription) {
+        const licenseBadge = `![License](https://img.shields.io/badge/license-${licenseType}-blue.svg)`;
+                    `${answers.appName}\n
+                    ${answers.tagline}\n
+                    ${licenseBadge}\n
+                    ## Description\n
+                    ${generateToC(answers)}
+                    ### About\n
+                    ${answers.about}\n
+                    ### Features\n
+                    ${answers.features}\n
+                    ### Watch ${answers['app-name']} in Action\n
+                    ![Media](${answers.media})\n
+                    ## Documentation\n
+                    ### Installation\n
+                    ${answers.installation}\n
+                    ### Dependencies\n
+                    ${answers.dependenciesCommon.join(', ')}
+                    ${answers.dependenciesOther}\n
+                    ### Usage: Getting Started\n
+                    ${answers.usage}\n
+                    ### Frequently Asked Questions\n
+                    ${answers.faq.trim()}\n
+                    If you have other questions, please contact me on github or by email.\n
+                    https://github.com/${answers.authorGitHub} or ${answers.authorEmail}\n
+                    ### Tests\n
+                    ${answers.testFrameworks}
+                    ${answers.tests}\n
+                    ## Plans for Future Development\n
+                    ${answers.future}\n
+                    ## Report Issues\n
+                    ${answers.issues}\n
+                    ## How to Contribute\n
+                    ${answers.contribute}\n
+                    ## License\n
+                    ${displayLicenseDescription(answers)}\n
+                    ## Author\n
+                    ### Name\n
+                    ${answers.authorName}\n
+                    ### GitHub\n
+                    ${answers.authorGitHub}\n
+                    ### Email\n
+                    ${answers.authorEmail}\n
+                    ### LinkedIn\n
+                    ${answers.authorLinkedIn}\n
+                    ### Portfolio\n
+                    ${answers.authorPortfolio}\n
+                    ### About Author\n
+                    ${answers.authorAbout.trim()}\n
+                    `;
+                }
 
-// Function call to initialize app
-//init();
+    // function to write the README file
+    inquirer.prompt(questions)
+
+    .then((answers) => {
+        const readme = generateReadme(answers);
+        const outputDir = 'readme-maker-output';
+        fs.mkdirSync(outputDir, { recursive: true });
+        fs.writeFile(`${outputDir}/README.md`, readme, (err) => {
+            if (err) throw err;
+            console.log('Your README file has been created successfully!');
+        });
+    })
+
+    .catch((error) => {
+         console.log('An error occurred:', error);
+        }
+    );
