@@ -2,14 +2,8 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-function initializify() {
-    console.log('Initializing Node.js application...');
-  }
-  
-  // Call the initializeApp function to initialize your application
-  initializify();
-  
 // TODO: Create an array of questions for user input
+var questions = [
 var questions = [
 //Name of App (app-name)
 { 
