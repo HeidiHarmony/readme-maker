@@ -17,7 +17,7 @@ inquirer
 //Name of App (app-name)
     { 
         type: 'input',
-        name: 'app-name',
+        name: 'appName',
         message: 'Welcome to README-Maker! We save you time in creating your readme documentation so you can spend more time on the important stuff! Let\'s get started. What is the name of your application?',
    },
    //Tagline (tagline)
@@ -205,7 +205,20 @@ inquirer
     },
     ])
 
+    function licenseTypeConstructor(answers) {
+        if (answers.license !== license.name.other) {
+            licenseType = answers.license.toLowerCase();
+        } else {
+            licenseType = answers.licenseOther.toLowerCase();
+        }
+    
+        return licenseType;
+    }
+
+    licenseTypeConstructor(answers);
+
     // function to write the README file
+    inquirer
     .then((answers) => {
         const readme = generateReadme(answers);
         const outputDir = 'readme-maker-output';
@@ -215,73 +228,76 @@ inquirer
             console.log('Your README file has been created successfully!');
         }); // Remove the extra closing parenthesis here
     })
+
     // function to generate the README file
         function generateReadme(answers) {
-            const licenseType = answers.license.toLowerCase() + answers.licenseOther.toLowerCase();
-            return `# ${answers['app-name']}\n
-            ${answers.tagline}\n
-            [![License](https://img.shields.io/badge/License-${licenseType}-blue.svg)](#) \n
-            ${generateToC(answers)}\n
-            ## Description\n
-            ### About\n
-            ${answers.about}\n
-            ### Features\n
-            ${answers.features}\n
-            ### Watch ${answers['app-name']} in Action\n
-            ![Media](${answers.media})\n
-            ## Documentation\n
-            ### Installation\n
-            ${answers.installation}\n
-            ### Dependencies\n
-            ${answers.dependenciesCommon.join(', ')}
-            ${answers.dependenciesOther}\n
-            ### Usage: Getting Started\n
-            ${answers.usage}\n
-            ### Frequently Asked Questions\n
-            ${answers.faq.trim()}\n
-            ### Tests\n
-            ${answers.testFrameworks}
-            ${answers.tests}\n
-            ## Plans for Future Development\n
-            ${answers.future}\n
-            ## Report Issues\n
-            ${answers.issues}\n
-            ## How to Contribute\n
-            ${answers.contribute}\n
-            ## License\n
-            ${displayLicenseDescription(answers)}\n
-            ## Author\n
-            ### Name\n
-            ${answers.authorName}\n
-            ### GitHub\n
-            ${answers.authorGitHub}\n
-            ### Email\n
-            ${answers.authorEmail}\n
-            ### LinkedIn\n
-            ${answers.authorLinkedIn}\n
-            ### Portfolio\n
-            ${answers.authorPortfolio}\n
-            ### About Author\n
-            ${answers.authorAbout.trim()}\n
-            `;
-        };
-function generateToC(answers) {
-    return `## Table of Contents\n
-    1. [About](#about)
-    2. [Features](#features)
-    3. [Media](#media)
-    4. [Documentation](#documentation)
-        1. [Installation](#installation)
-        2. [Dependencies](#dependencies)
-        3. [Getting Started](#usage)
-        4. [Frequently Asked Questions](#faq)
-        5. [Tests](#tests)
-    5. [Plans for Future Development](#future)
-    6. [Report Issues](#issues)
-        7. [How to Contribute](#contribute)
-        8. [License](#license)
-        9. [Author](#author)`;
-    }
+            const licenseBadge = `![License](https://img.shields.io/badge/license-${licenseType}-blue.svg)`;
+                        `${answers.appName}\n
+                        ${answers.tagline}\n
+                        ${licenseBadge}\n
+                        ## Description\n
+                        ### About\n
+                        ${answers.about}\n
+                        ### Features\n
+                        ${answers.features}\n
+                        ### Watch ${answers['app-name']} in Action\n
+                        ![Media](${answers.media})\n
+                        ## Documentation\n
+                        ### Installation\n
+                        ${answers.installation}\n
+                        ### Dependencies\n
+                        ${answers.dependenciesCommon.join(', ')}
+                        ${answers.dependenciesOther}\n
+                        ### Usage: Getting Started\n
+                        ${answers.usage}\n
+                        ### Frequently Asked Questions\n
+                        ${answers.faq.trim()}\n
+                        If you have other questions, please contact me on github or by email.\n
+                        https://github.com/${answers.authorGitHub} or ${answers.authorEmail}\n
+                        ### Tests\n
+                        ${answers.testFrameworks}
+                        ${answers.tests}\n
+                        ## Plans for Future Development\n
+                        ${answers.future}\n
+                        ## Report Issues\n
+                        ${answers.issues}\n
+                        ## How to Contribute\n
+                        ${answers.contribute}\n
+                        ## License\n
+                        ${displayLicenseDescription(answers)}\n
+                        ## Author\n
+                        ### Name\n
+                        ${answers.authorName}\n
+                        ### GitHub\n
+                        ${answers.authorGitHub}\n
+                        ### Email\n
+                        ${answers.authorEmail}\n
+                        ### LinkedIn\n
+                        ${answers.authorLinkedIn}\n
+                        ### Portfolio\n
+                        ${answers.authorPortfolio}\n
+                        ### About Author\n
+                        ${answers.authorAbout.trim()}\n
+                        `;
+                    }
+                    
+            function generateToC(answers) {
+                return `## Table of Contents\n
+                1. [About](#about)
+                2. [Features](#features)
+                3. [Media](#media)
+                4. [Documentation](#documentation)
+                    1. [Installation](#installation)
+                    2. [Dependencies](#dependencies)
+                    3. [Getting Started](#usage)
+                    4. [Frequently Asked Questions](#faq)
+                    5. [Tests](#tests)
+                5. [Plans for Future Development](#future)
+                6. [Report Issues](#issues)
+                    7. [How to Contribute](#contribute)
+                    8. [License](#license)
+                    9. [Author](#author)`;
+                }
 
     //License Description Function
 
