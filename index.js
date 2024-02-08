@@ -87,7 +87,7 @@ var questions = [
           return true; // Skip the question
         }
         return input !== '' || 'Please enter a value or "skip"';
-        },
+        }
 },
 //Getting Started
 {
@@ -118,6 +118,12 @@ var questions = [
     type: 'editor',
     name: 'tests',
     message: 'What else does the user need to know about testing? Possible topics include: test set up, structue, how to run, coverage, results, etc.',
+    validate: function (input) {
+        if (input.toLowerCase() === 'skip') {
+          return true; // Skip the question
+        }
+        return input !== '' || 'Please enter a value or "skip"';
+        }
 },
 //Plans for future development
 {
@@ -188,27 +194,29 @@ var questions = [
     name: 'authorPortfolio',
     message: 'What is your portfolio URL?',
 },
-//About Author
+// About Author
 {
     type: 'input',
     name: 'authorAbout',
     message: 'What would you like people to know about you?',
 },
 ];
-
+// FUNCTION CALL: QUESTIONS
 inquirer
     .prompt(questions)
 
-    // function to write the README file
-
+// FUNCTION CALL with a callback function as an argument to write the README file
     .then((answers) => {
         const readme = generateReadme(answers);
         const outputDir = 'readme-maker-output';
+
+        licenseTypeConstructor(answers);
+        
         fs.mkdirSync(outputDir, { recursive: true });
         fs.writeFile(`${outputDir}/README.md`, readme, (err) => {
             if (err) throw err;
             console.log('Your README file has been created successfully!');
-        }); // Remove the extra closing parenthesis here
+        });
     })
 
     .catch((error) => {
@@ -219,7 +227,7 @@ inquirer
         }
     });
 
-    // function to generate the README file
+    // README generation function Declaration
         function generateReadme(answers) {
             const licenseBadge = `![License](https://img.shields.io/badge/license-${licenseType}-blue.svg)`;
                         `${answers.appName}\n
@@ -271,8 +279,8 @@ inquirer
                         ${answers.authorAbout.trim()}\n
                         `;
                     }
-                    
-            function generateToC(answers) {
+    //Table of Contents Function Declaration                
+          function generateToC(answers) {
                 return `## Table of Contents\n
                 1. [About](#about)
                 2. [Features](#features)
@@ -288,38 +296,37 @@ inquirer
                     7. [How to Contribute](#contribute)
                     8. [License](#license)
                     9. [Author](#author)`;
-                }
+                } 
 
-    //License Description Function
-
-    function displayLicenseDescription(answers) {
-        let description = '';
-        const licenseLink = `https://choosealicense.com/licenses/${answers.license.toLowerCase()}`;
-            switch (answers.license) {
-                case 'MIT':
-                    return "MIT License\nA short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.\n" + licenseLink;
-                case 'GNU':
-                    return "GNU License\nA copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms.\n" + licenseLink;
-                case 'Apache':
-                    return "Apache License\nA permissive license whose main conditions require preservation of copyright and license.\n" + licenseLink;
-                case 'Unlicense':
-                    return "Unlicense\nA public domain dedication intended to allow reuse of code with minimal restrictions.\n" + licenseLink;
-                case 'Other':
-                    return `Other: ${answers.licenseOther}`;
-                case 'None': 
-                    return "No license. All rights reserved.";
-        }
-            return description + licenseLink;
-    }
+    //License Description Function Declaration
+            function displayLicenseDescription(answers) {
+                const licenseLink = `https://choosealicense.com/licenses/${answers.license.toLowerCase()}`;
+                    switch (answers.license) {
+                        case 'MIT':
+                            return `MIT License\nA short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.\n ${licenseLink};`
+                        case 'GNU':
+                            return `GNU License\nA copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms.\n + ${licenseLink};`
+                        case 'Apache':
+                            return `Apache License\nA permissive license whose main conditions require preservation of copyright and license.\n + ${licenseLink};`
+                        case 'Unlicense':
+                            return `Unlicense\nA public domain dedication intended to allow reuse of code with minimal restrictions.\n + ${licenseLink};`
+                        case 'Other':
+                            return `Licensed under ${answers.licenseOther}`;
+                        case 'None': 
+                            return "No license. All rights reserved.";
+                        }
+                    } 
+            
 
     function licenseTypeConstructor(answers) {
-        if (answers.license !== license.name.other) {
+        let licenseType = ''; // Initialize the licenseType variable with a default value
+        if (answers.license === license.name.none) {
             licenseType = answers.license.toLowerCase();
-        } else {
+        } else if (answers.license === license.name.other) {
             licenseType = answers.licenseOther.toLowerCase();
+        } else {
+            licenseType = answers.license;
         }
-    
+        console.log(licenseType);
         return licenseType;
     }
-
-    licenseTypeConstructor(answers);
