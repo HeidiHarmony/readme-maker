@@ -115,15 +115,19 @@ var questions = [
         }
 },
 {
-    type: 'editor',
+    type: 'input',
     name: 'tests',
-    message: 'What else does the user need to know about testing? Possible topics include: test set up, structue, how to run, coverage, results, etc.',
-    validate: function (input) {
-        if (answers.testFrameworks() === 'skip') {
+    message: 'Please provide tests for your application: (type SKIP to skip)',
+    when: function(answers) {
+        return answers.testFrameworks !== 'SKIP';
+    },
+    validate: function(value) {
+        if (value.length) {
             return true;
+        } else {
+            return 'Please enter a value or "skip"';
         }
-          return input = ''; // Skip the question if the previous question was skipped
-        }
+    }
 },
 //Plans for future development
 {
