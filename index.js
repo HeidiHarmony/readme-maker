@@ -119,10 +119,10 @@ var questions = [
     name: 'tests',
     message: 'What else does the user need to know about testing? Possible topics include: test set up, structue, how to run, coverage, results, etc.',
     validate: function (input) {
-        if (input.toLowerCase() === 'skip') {
-          return true; // Skip the question
+        if (answers.testFrameworks() === 'skip') {
+            return true;
         }
-        return input !== '' || 'Please enter a value or "skip"';
+          return input = ''; // Skip the question if the previous question was skipped
         }
 },
 //Plans for future development
@@ -299,25 +299,18 @@ inquirer
                 } 
 
     //License Description Function Declaration
-            function displayLicenseDescription(answers) {
+            function displayLicenseDescription(licenseType) {
                 const licenseLink = `https://choosealicense.com/licenses/${answers.license.toLowerCase()}`;
-                    switch (answers.license) {
-                        case 'MIT':
-                            return `MIT License\nA short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.\n ${licenseLink};`
-                        case 'GNU':
-                            return `GNU License\nA copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms.\n + ${licenseLink};`
-                        case 'Apache':
-                            return `Apache License\nA permissive license whose main conditions require preservation of copyright and license.\n + ${licenseLink};`
-                        case 'Unlicense':
-                            return `Unlicense\nA public domain dedication intended to allow reuse of code with minimal restrictions.\n + ${licenseLink};`
-                        case 'Other':
-                            return `Licensed under ${answers.licenseOther}`;
-                        case 'None': 
-                            return "No license. All rights reserved.";
+                    if (licenseType === license.name.none) {
+                        return "No license. All rights reserved.";
+                    } else if (licenseType === license.name.other) {
+                        return `Licensed under ${answers.licenseOther}`;
+                    } else {
+                           return `Licensed under ${answers.license}\n ${licenseLink};`
                         }
                     } 
-            
-
+    
+    //License Type Constructor Function Declaration
     function licenseTypeConstructor(answers) {
         let licenseType = ''; // Initialize the licenseType variable with a default value
         if (answers.license === license.name.none) {
