@@ -2,7 +2,38 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
+const questions = require('./questions');
+const userInput = require('./answers');
+
 // TODO: Create an array of questions for user input
+
+    //License Type Constructor Function Declaration
+    function licenseTypeConstructor(userInput) {
+        return new Promise((resolve, reject) => {
+        let licenseType = ''; // Initialize the licenseType variable with a default value
+        if (userInput.license.name === 'none') {
+            licenseType = license.name.none.toLowerCase();
+        } else if (userInput.license.name === 'other') {
+            licenseType = licenseOther.name.toLowerCase();
+        } else {
+            licenseType = userInput.license.name.toLowerCase();
+        }
+        console.log(licenseType);
+        resolve (licenseType);
+    });
+}
+
+ //License Description Function Declaration
+ function displayLicenseDescription(licenseType, userInput) {
+    const licenseLink = `https://choosealicense.com/licenses/${userInput.license.toLowerCase()}`;
+        if (licenseType === license.name.none) {
+            return "No license. All rights reserved.";
+        } else if (licenseType === license.name.other) {
+            return `Licensed under ${userInput.licenseOther}`;
+        } else {
+               return `Licensed under ${userInput.license}\n ${licenseLink};`
+            }
+        } 
 
 var questions = [
 //Name of App (app-name)
@@ -205,16 +236,19 @@ var questions = [
     message: 'What would you like people to know about you?',
 },
 ];
+
 // FUNCTION CALL: QUESTIONS
 inquirer
     .prompt(questions)
 
 // FUNCTION CALL with a callback function as an argument to write the README file
     .then((answers) => {
-        const readme = generateReadme(answers);
+        const userInput = answers;
         const outputDir = 'readme-maker-output';
 
-        licenseTypeConstructor(answers);
+        licenseTypeConstructor(userInput)
+        .then((licenseType) => {
+            const readme = generateReadme(userInput, licenseType);
         
         fs.mkdirSync(outputDir, { recursive: true });
         fs.writeFile(`${outputDir}/README.md`, readme, (err) => {
@@ -222,7 +256,10 @@ inquirer
             console.log('Your README file has been created successfully!');
         });
     })
-
+    .catch((error) => {
+        console.log('An error occurred:', error);
+    });
+    })
     .catch((error) => {
         if (error.isTtyError) {
             console.log('Prompt couldn\'t be rendered in the current environment');
@@ -232,59 +269,59 @@ inquirer
     });
 
     // README generation function Declaration
-        function generateReadme(answers) {
+        function generateReadme(userInput, licenseType) {
             const licenseBadge = `![License](https://img.shields.io/badge/license-${licenseType}-blue.svg)`;
-                        `${answers.appName}\n
-                        ${answers.tagline}\n
+                return `${userInput.appName}\n
+                        ${userInput.tagline}\n
                         ${licenseBadge}\n
                         ## Description\n
-                        ${generateToC(answers)}\n
+                        ${generateToC(userInput)}\n
                         ### About\n
-                        ${answers.about}\n
+                        ${userInput.about}\n
                         ### Features\n
-                        ${answers.features}\n
-                        ### Watch ${answers['app-name']} in Action\n
-                        ![Media](${answers.media})\n
+                        ${userInput.features}\n
+                        ### Watch ${userInput.appName} in Action\n
+                        ![Media](${userInput.media})\n
                         ## Documentation\n
                         ### Installation\n
-                        ${answers.installation}\n
+                        ${userInput.installation}\n
                         ### Dependencies\n
-                        ${answers.dependenciesCommon.join(', ')}
-                        ${answers.dependenciesOther}\n
+                        ${userInput.dependenciesCommon.join(', ')}
+                        ${userInput.dependenciesOther}\n
                         ### Usage: Getting Started\n
-                        ${answers.usage}\n
+                        ${userInput.usage}\n
                         ### Frequently Asked Questions\n
-                        ${answers.faq.trim()}\n
+                        ${userInput.faq.trim()}\n
                         If you have other questions, please contact me on github or by email.\n
-                        https://github.com/${answers.authorGitHub} or ${answers.authorEmail}\n
+                        https://github.com/${userInput.authorGitHub} or ${userInput.authorEmail}\n
                         ### Tests\n
-                        ${answers.testFrameworks}
-                        ${answers.tests}\n
+                        ${userInput.testFrameworks}
+                        ${userInput.tests}\n
                         ## Plans for Future Development\n
-                        ${answers.future}\n
+                        ${userInput.future}\n
                         ## Report Issues\n
-                        ${answers.issues}\n
+                        ${userInput.issues}\n
                         ## How to Contribute\n
-                        ${answers.contribute}\n
+                        ${userInput.contribute}\n
                         ## License\n
-                        ${displayLicenseDescription(answers)}\n
+                        ${displayLicenseDescription(licenseType, userInput)}\n
                         ## Author\n
                         ### Name\n
-                        ${answers.authorName}\n
+                        ${userInput.authorName}\n
                         ### GitHub\n
-                        ${answers.authorGitHub}\n
+                        ${userInput.authorGitHub}\n
                         ### Email\n
-                        ${answers.authorEmail}\n
+                        ${userInput.authorEmail}\n
                         ### LinkedIn\n
-                        ${answers.authorLinkedIn}\n
+                        ${userInput.authorLinkedIn}\n
                         ### Portfolio\n
-                        ${answers.authorPortfolio}\n
+                        ${userInput.authorPortfolio}\n
                         ### About Author\n
-                        ${answers.authorAbout.trim()}\n
+                        ${userInput.authorAbout.trim()}\n
                         `;
                     }
     //Table of Contents Function Declaration                
-          function generateToC(answers) {
+          function generateToC(userInput) {
                 return `## Table of Contents\n
                 1. [About](#about)
                 2. [Features](#features)
@@ -300,30 +337,4 @@ inquirer
                     7. [How to Contribute](#contribute)
                     8. [License](#license)
                     9. [Author](#author)`;
-                } 
-
-    //License Description Function Declaration
-            function displayLicenseDescription(licenseType) {
-                const licenseLink = `https://choosealicense.com/licenses/${answers.license.toLowerCase()}`;
-                    if (licenseType === license.name.none) {
-                        return "No license. All rights reserved.";
-                    } else if (licenseType === license.name.other) {
-                        return `Licensed under ${answers.licenseOther}`;
-                    } else {
-                           return `Licensed under ${answers.license}\n ${licenseLink};`
-                        }
-                    } 
-    
-    //License Type Constructor Function Declaration
-    function licenseTypeConstructor(answers) {
-        let licenseType = ''; // Initialize the licenseType variable with a default value
-        if (answers.license === license.name.none) {
-            licenseType = answers.license.toLowerCase();
-        } else if (answers.license === license.name.other) {
-            licenseType = answers.licenseOther.toLowerCase();
-        } else {
-            licenseType = answers.license;
-        }
-        console.log(licenseType);
-        return licenseType;
-    }
+                }
