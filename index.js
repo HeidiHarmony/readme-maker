@@ -2,40 +2,110 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-const questions = require('./questions');
-const userInput = require('./answers');
 
 // TODO: Create an array of questions for user input
 
     //License Type Constructor Function Declaration
     function licenseTypeConstructor(userInput) {
         return new Promise((resolve, reject) => {
-        let licenseType = ''; // Initialize the licenseType variable with a default value
-        if (userInput.license.name === 'none') {
-            licenseType = license.name.none.toLowerCase();
-        } else if (userInput.license.name === 'other') {
-            licenseType = licenseOther.name.toLowerCase();
-        } else {
-            licenseType = userInput.license.name.toLowerCase();
-        }
-        console.log(licenseType);
-        resolve (licenseType);
-    });
-}
+            let licenseType = userInput.license;
+            if (userInput.license === 'None') {
+                licenseType = 'None';
+                resolve(licenseType);
+            } else if (userInput.license === 'Other') {
+                licenseType = userInput.licenseOther;
+                resolve(licenseType);
+            } else {
+                resolve(licenseType);
+            }
+            reject('An error occurred while defining the license type');
+        });
+    }
 
  //License Description Function Declaration
- function displayLicenseDescription(licenseType, userInput) {
-    const licenseLink = `https://choosealicense.com/licenses/${userInput.license.toLowerCase()}`;
-        if (licenseType === license.name.none) {
-            return "No license. All rights reserved.";
-        } else if (licenseType === license.name.other) {
-            return `Licensed under ${userInput.licenseOther}`;
+function displayLicenseDescription(licenseType) {
+    let licenseInfo = '';
+    if (licenseType === 'None') {
+        licenseInfo = 'No license. All rights reserved.';
+        } else if (licenseType === "Other") {
+            licenseInfo = `Licensed under ${licenseType}`;
         } else {
-               return `Licensed under ${userInput.license}\n ${licenseLink};`
-            }
-        } 
+            licenseInfo = `Licensed under ${licenseType}\n https://choosealicense.com/licenses/${licenseType}`;
+        }
+        return licenseInfo;
+    }
 
-var questions = [
+     // FUNCTION DECLARATION: README GENERATOR
+     function generateReadme(userInput, licenseType, licenseInfo) {
+        return `# ${userInput.appName}\n
+        ${userInput.tagline}\n
+        [![License](https://img.shields.io/badge/License-${licenseType}-blue.svg)](#) \n
+        ${generateToC(userInput)}\n
+        ## Description\n
+        ### About\n
+        ${userInput.about}\n
+        ### Features\n
+        ${userInput.features}\n
+        ### Watch ${userInput.appName} in Action\n
+        ![Media](${userInput.media})\n
+        ## Documentation\n
+        ### Installation\n
+        ${userInput.installation}\n
+        ### Dependencies\n
+        ${userInput.dependenciesCommon.join(', ')}
+        ${userInput.dependenciesOther}\n
+        ### Usage: Getting Started\n
+        ${userInput.usage}\n
+        ### Frequently Asked Questions\n
+        ${userInput.faq.trim()}\n
+        ### Tests\n
+        ${userInput.testFrameworks}
+        ${userInput.tests}\n
+        ## Plans for Future Development\n
+        ${userInput.future}\n
+        ## Report Issues\n
+        ${userInput.issues}\n
+        ## How to Contribute\n
+        ${userInput.contribute}\n
+        ## License\n
+        ${licenseInfo}\n
+        ## Author\n
+        ### Name\n
+        ${userInput.authorName}\n
+        ### GitHub\n
+        ${userInput.authorGitHub}\n
+        ### Email\n
+        ${userInput.authorEmail}\n
+        ### LinkedIn\n
+        ${userInput.authorLinkedIn}\n
+        ### Portfolio\n
+        ${userInput.authorPortfolio}\n
+        ### About Author\n
+        ${userInput.authorAbout.trim()}\n
+        `;
+    };
+
+    //Table of Contents Function Declaration                
+    function generateToC(userInput) {
+        return `## Table of Contents\n
+        1. [About](#about)
+        2. [Features](#features)
+        3. [Media](#media)
+        4. [Documentation](#documentation)
+            1. [Installation](#installation)
+            2. [Dependencies](#dependencies)
+            3. [Getting Started](#usage)
+            4. [Frequently Asked Questions](#faq)
+            5. [Tests](#tests)
+        5. [Plans for Future Development](#future)
+        6. [Report Issues](#issues)
+            7. [How to Contribute](#contribute)
+            8. [License](#license)
+            9. [Author](#author)`;
+    }
+
+
+var promptsToUser = [
 //Name of App (app-name)
 { 
     type: 'input',
@@ -47,12 +117,12 @@ var questions = [
     type: 'input',
     name: 'tagline',
     message: 'What is your application\'s tagline or flavor text? (type SKIP to skip):',
-    validate: function (input) {
+    validate: (input) => {
         if (input.toLowerCase() === 'skip') {
-          return true; // Skip the question
+            return true; // Skip the question
         }
         return input !== '' || 'Please enter a value or "skip"';
-        }
+    }
 },
 //Link to deployed application
 {
@@ -131,14 +201,14 @@ var questions = [
     type: 'editor',
     name: 'faq',
     message: 'What are some frequently asked questions about your application?',
-    default: 'Q: \nA: \n\nQ: \nA: \n\nQ: \nA:',
+    default: 'Q: \nA: \n\nQ: \nA: \n\nQ: \nA: ',
 },
 //Tests
 {
     type: 'input',
     name: 'testFrameworks',
     message: 'What frameworks have been used to test your application? (type SKIP to skip)',
-    validate: function (input) {
+    validate: function(input) {
         if (input.toLowerCase() === 'skip') {
           return true; // Skip the question
         }
@@ -150,10 +220,10 @@ var questions = [
     name: 'tests',
     message: 'Please provide tests for your application: (type SKIP to skip)',
     when: function(answers) {
-        return answers.testFrameworks !== 'SKIP';
+        return answers.testFrameworks.toLowerCase() !== 'skip';
     },
     validate: function(value) {
-        if (value.length) {
+        if (value.length || value.toLowerCase() === 'skip') {
             return true;
         } else {
             return 'Please enter a value or "skip"';
@@ -184,12 +254,12 @@ var questions = [
     name: 'license',
     message: 'What license are you using for your application?',
     choices: [
-        { name: 'MIT', description: 'A permissive license that is short and to the point. It lets people do anything they want as long as they provide appropriate attribution and don\’t hold you liable.' },
-        { name: 'GNU', description: 'A copyleft license that ensures the software remains free and open-source, and any modifications or derivatives are also licensed under the GPL' },
-        { name: 'Apache', description: 'A permissive license whose main conditions require preservation of copyright and license' },
-        { name: 'Unlicense', description: 'A public domain dedication intended to allow reuse of code with minimal restrictions' },
+        { name: 'MIT' },
+        { name: 'GNU' },
+        { name: 'Apache' },
+        { name: 'Unlicense' },
         { name: 'Other' },
-        { name: 'None', description: 'No license. Choose this option if you do not want to include a license with your application.' }
+        { name: 'None' }
     ],
 },
 {
@@ -239,102 +309,31 @@ var questions = [
 
 // FUNCTION CALL: QUESTIONS
 inquirer
-    .prompt(questions)
+    .prompt(promptsToUser)
 
 // FUNCTION CALL with a callback function as an argument to write the README file
-    .then((answers) => {
-        const userInput = answers;
-        const outputDir = 'readme-maker-output';
+.then((answers) => {
+    const userInput = answers;
+    console.log('User input has been collected:', userInput);
 
-        licenseTypeConstructor(userInput)
-        .then((licenseType) => {
-            const readme = generateReadme(userInput, licenseType);
+    return licenseTypeConstructor(userInput)
+.then((licenseType) => {
+        console.log('The license type is:', licenseType);
+        const licenseInfo = displayLicenseDescription(licenseType, userInput);
+        const readme = generateReadme(userInput, licenseType, licenseInfo);
         
-        fs.mkdirSync(outputDir, { recursive: true });
-        fs.writeFile(`${outputDir}/README.md`, readme, (err) => {
-            if (err) throw err;
-            console.log('Your README file has been created successfully!');
-        });
-    })
-    .catch((error) => {
-        console.log('An error occurred:', error);
+        return { readme, outputDir: 'readme-maker-output' };
     });
-    })
-    .catch((error) => {
-        if (error.isTtyError) {
-            console.log('Prompt couldn\'t be rendered in the current environment');
-        } else {   
-            console.log('An error occurred:', error);
+})
+.then(({ readme, outputDir }) => {
+    fs.mkdirSync(outputDir, { recursive: true });
+    fs.writeFile(`${outputDir}/README.md`, readme, (err) => {
+        if (err) {
+            console.error('An error occurred while writing the file:', err);
+        } else {
+            console.log('Your README file has been written successfully!');
         }
     });
-
-    // README generation function Declaration
-        function generateReadme(userInput, licenseType) {
-            const licenseBadge = `![License](https://img.shields.io/badge/license-${licenseType}-blue.svg)`;
-                return `${userInput.appName}\n
-                        ${userInput.tagline}\n
-                        ${licenseBadge}\n
-                        ## Description\n
-                        ${generateToC(userInput)}\n
-                        ### About\n
-                        ${userInput.about}\n
-                        ### Features\n
-                        ${userInput.features}\n
-                        ### Watch ${userInput.appName} in Action\n
-                        ![Media](${userInput.media})\n
-                        ## Documentation\n
-                        ### Installation\n
-                        ${userInput.installation}\n
-                        ### Dependencies\n
-                        ${userInput.dependenciesCommon.join(', ')}
-                        ${userInput.dependenciesOther}\n
-                        ### Usage: Getting Started\n
-                        ${userInput.usage}\n
-                        ### Frequently Asked Questions\n
-                        ${userInput.faq.trim()}\n
-                        If you have other questions, please contact me on github or by email.\n
-                        https://github.com/${userInput.authorGitHub} or ${userInput.authorEmail}\n
-                        ### Tests\n
-                        ${userInput.testFrameworks}
-                        ${userInput.tests}\n
-                        ## Plans for Future Development\n
-                        ${userInput.future}\n
-                        ## Report Issues\n
-                        ${userInput.issues}\n
-                        ## How to Contribute\n
-                        ${userInput.contribute}\n
-                        ## License\n
-                        ${displayLicenseDescription(licenseType, userInput)}\n
-                        ## Author\n
-                        ### Name\n
-                        ${userInput.authorName}\n
-                        ### GitHub\n
-                        ${userInput.authorGitHub}\n
-                        ### Email\n
-                        ${userInput.authorEmail}\n
-                        ### LinkedIn\n
-                        ${userInput.authorLinkedIn}\n
-                        ### Portfolio\n
-                        ${userInput.authorPortfolio}\n
-                        ### About Author\n
-                        ${userInput.authorAbout.trim()}\n
-                        `;
-                    }
-    //Table of Contents Function Declaration                
-          function generateToC(userInput) {
-                return `## Table of Contents\n
-                1. [About](#about)
-                2. [Features](#features)
-                3. [Media](#media)
-                4. [Documentation](#documentation)
-                    1. [Installation](#installation)
-                    2. [Dependencies](#dependencies)
-                    3. [Getting Started](#usage)
-                    4. [Frequently Asked Questions](#faq)
-                    5. [Tests](#tests)
-                5. [Plans for Future Development](#future)
-                6. [Report Issues](#issues)
-                    7. [How to Contribute](#contribute)
-                    8. [License](#license)
-                    9. [Author](#author)`;
-                }
+}).catch((error) => {
+    console.error('An error occurred:', error);
+});
