@@ -30,20 +30,40 @@ function displayLicenseDescription(licenseType) {
         } else if (licenseType === "Other") {
             licenseInfo = `Licensed under ${licenseType}`;
         } else {
-            licenseInfo = `Licensed under ${licenseType}\n https://choosealicense.com/licenses/${licenseType}`;
+            licenseInfo = `Licensed under [${licenseType}](https://choosealicense.com/licenses/${licenseType})`;
         }
         return licenseInfo;
     }
 
 // FUNCTION DECLARATION: README GENERATOR
     function generateReadme(userInput, licenseType, licenseInfo) {
+
         const licenseBadge = "https://img.shields.io/badge/License-" + licenseType + "-blue.svg"
-    return `
-# ${userInput.appName}
-*${userInput.tagline}*
+
+        var includeTestFrameworks = true; 
+        if (userInput.testFrameworks.toLowerCase() === 'skip') {
+            includeTestFrameworks = false;
+           var readmeTesting = '';
+        } else {
+            includeTestFrameworks = true;
+            readmeTesting = `### Tests \n${userInput.testFrameworks}\n${userInput.tests}`;
+        }
+        console.log('Include Test Frameworks:', includeTestFrameworks, 'Include this testing info in readme: ', readmeTesting);
+
+        var otherDependencies = null;
+        if (userInput.dependenciesOther.toLowerCase() !== 'skip') {
+            otherDependencies = userInput.dependenciesOther;
+        } else {
+            otherDependencies = null;
+        }
+        console.log('Other Dependencies:', otherDependencies);
+
+    return `# ${userInput.appName}
+
+${userInput.tagline}nno
 
 ![License Badge](${licenseBadge})
-${generateToC.trim()}
+${generateToC()}
 
 ## Description
 
@@ -67,7 +87,7 @@ ${userInput.installation}
 
 ### Dependencies
 
-${userInput.dependenciesCommon.join(', ')}${userInput.dependenciesOther}
+${userInput.dependenciesCommon} + ${userInput.dependenciesOther}
 
 ### Usage: Getting Started
 
@@ -76,13 +96,7 @@ ${userInput.usage}
 ## Frequently Asked Questions
 
 ${userInput.faq.trim()}
-
-## Tests
-
-${userInput.testFrameworks}
-
-${userInput.tests}
-
+${readmeTesting}
 ## Plans for Future Development
 
 ${userInput.future}
@@ -124,12 +138,19 @@ ${userInput.authorPortfolio}
 ### About Author
 
 ${userInput.authorAbout.trim()}
-    `;
+`;
     }
 
-    //Table of Contents Function Declaration                
-    function generateToC() {
-        return `
+//Table of Contents Function Declaration                
+function generateToC(includeTestFrameworks) {
+    let testSection = null;
+    if (includeTestFrameworks === true) {
+        testSection = '[Tests](#tests)';
+    } else {
+        testSection = null;
+    }
+    console.log('Test Section:', testSection);
+    return `
 ## Table of Contents
 
 [About](#about)
@@ -138,13 +159,12 @@ ${userInput.authorAbout.trim()}
 [Dependencies](#dependencies)
 [Getting Started](#usage-getting-started)
 [Frequently Asked Questions](#frequently-asked-questions)
-[Tests](#tests)
+${testSection}
 [Plans for Future Development](#plans-for-future-development)
 [Report Issues](#report-issues)
 [How to Contribute](#how-to-contribute)
 [License](#license)
-[About the Author](#about-the-author)
-`;
+[About the Author](#about-the-author)`;
     }
 
 
@@ -244,7 +264,7 @@ var promptsToUser = [
     type: 'editor',
     name: 'faq',
     message: 'What are some frequently asked questions about your application?',
-    default: 'Q: \nA: \n\nQ: \nA: \n\nQ: \nA: ',
+    default: 'Q:\nA:\nQ:\nA:\nQ:\nA:',
 },
 //Tests
 {

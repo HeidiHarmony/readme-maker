@@ -1,110 +1,99 @@
+# nkdjnskjs
 
-# dasdjnaskdjaksd
+skipnno
 
-![License Badge](https://img.shields.io/badge/License-MIT-blue.svg)
+![License Badge](https://img.shields.io/badge/License-GNU-blue.svg)
 
 ## Table of Contents
 
-[Description](#description)
 [About](#about)
 [Features](#features)
 [Installation](#installation)
 [Dependencies](#dependencies)
 [Getting Started](#usage-getting-started)
 [Frequently Asked Questions](#frequently-asked-questions)
-[Tests](#tests)
+null
 [Plans for Future Development](#plans-for-future-development)
 [Report Issues](#report-issues)
 [How to Contribute](#how-to-contribute)
 [License](#license)
 [About the Author](#about-the-author)
 
-
 ## Description
 
 ### About
 
-laslkdmaslkdmsalkdm
+ckjasckas
 
 ### Features
 
-aslkdmsaldkmsakld
+sckajsascn
 
-### Watch dasdjnaskdjaksd in Action
+### Watch nkdjnskjs in Action
 
-![App Screenshot/Demo]sadkmasldkmaslkdmlasmd
+![App Screenshot/Demo]cnkjakjascjnacj
 
 ## Documentation
 
 ### Installation
 
-asdkmasldkmaslkdmasld
+nakjcnksc
 
 ### Dependencies
 
-fs, Express, React, Inquirer, Mongooseskip
+Express + skip
 
 ### Usage: Getting Started
 
-askjnaskjc
+askdjnaskjcnaskjsa
 
 ## Frequently Asked Questions
 
-Q: 
-A: 
-
-Q: 
-A: 
-
-Q: 
+Q:
 A:
-
-## Tests
-
-skip
-
-undefined
+Q:
+A:
+Q:
+A:
 
 ## Plans for Future Development
 
-sjnksajnskajcn
+djknsdkjnsdkjvn
 
 ## Report Issues
 
-sksalckmalskcmsac
+aksjcnaskjncaskjcna
 
 ## How to Contribute
 
-aslkmslakcm
+kjnakjsckajs
 
 ## License
 
-Licensed under MIT
- https://choosealicense.com/licenses/MIT
+Licensed under [GNU](https://choosealicense.com/licenses/GNU)
 
 ## About the Author
 
 ### Name
 
-heidi
+ckjacka
 
 ### GitHub
 
-sldnaslkclsaknc
+asksjackjacn
 
 ### Email
 
-sacnaslkslakn
+aclkamscksamc
 
 ### LinkedIn
 
-salckaslkcmaslkcm
+akscslakcmsalc
 
 ### Portfolio
 
-aslkcmsalkcmsalkcm
+s;alc,a;slc,acl;
 
 ### About Author
 
-aslckmaslkcmlakcmaslc
-    
+kjcadkcja
