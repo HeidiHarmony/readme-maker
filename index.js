@@ -35,73 +35,116 @@ function displayLicenseDescription(licenseType) {
         return licenseInfo;
     }
 
-     // FUNCTION DECLARATION: README GENERATOR
-     function generateReadme(userInput, licenseType, licenseInfo) {
-        return `# ${userInput.appName}\n
-        ${userInput.tagline}\n
-        [![License](https://img.shields.io/badge/License-${licenseType}-blue.svg)](#) \n
-        ${generateToC(userInput)}\n
-        ## Description\n
-        ### About\n
-        ${userInput.about}\n
-        ### Features\n
-        ${userInput.features}\n
-        ### Watch ${userInput.appName} in Action\n
-        ![Media](${userInput.media})\n
-        ## Documentation\n
-        ### Installation\n
-        ${userInput.installation}\n
-        ### Dependencies\n
-        ${userInput.dependenciesCommon.join(', ')}
-        ${userInput.dependenciesOther}\n
-        ### Usage: Getting Started\n
-        ${userInput.usage}\n
-        ### Frequently Asked Questions\n
-        ${userInput.faq.trim()}\n
-        ### Tests\n
-        ${userInput.testFrameworks}
-        ${userInput.tests}\n
-        ## Plans for Future Development\n
-        ${userInput.future}\n
-        ## Report Issues\n
-        ${userInput.issues}\n
-        ## How to Contribute\n
-        ${userInput.contribute}\n
-        ## License\n
-        ${licenseInfo}\n
-        ## Author\n
-        ### Name\n
-        ${userInput.authorName}\n
-        ### GitHub\n
-        ${userInput.authorGitHub}\n
-        ### Email\n
-        ${userInput.authorEmail}\n
-        ### LinkedIn\n
-        ${userInput.authorLinkedIn}\n
-        ### Portfolio\n
-        ${userInput.authorPortfolio}\n
-        ### About Author\n
-        ${userInput.authorAbout.trim()}\n
-        `;
-    };
+// FUNCTION DECLARATION: README GENERATOR
+    function generateReadme(userInput, licenseType, licenseInfo) {
+        const licenseBadge = "https://img.shields.io/badge/License-" + licenseType + "-blue.svg"
+    return `
+# ${userInput.appName}
+*${userInput.tagline}*
+
+![License Badge](${licenseBadge})
+${generateToC.trim()}
+
+## Description
+
+### About
+
+${userInput.about}
+
+### Features
+
+${userInput.features}
+
+### Watch ${userInput.appName} in Action
+
+![App Screenshot/Demo]${userInput.media}
+
+## Documentation
+
+### Installation
+
+${userInput.installation}
+
+### Dependencies
+
+${userInput.dependenciesCommon.join(', ')}${userInput.dependenciesOther}
+
+### Usage: Getting Started
+
+${userInput.usage}
+
+## Frequently Asked Questions
+
+${userInput.faq.trim()}
+
+## Tests
+
+${userInput.testFrameworks}
+
+${userInput.tests}
+
+## Plans for Future Development
+
+${userInput.future}
+
+## Report Issues
+
+${userInput.issues}
+
+## How to Contribute
+
+${userInput.contribute}
+
+## License
+
+${licenseInfo}
+
+## About the Author
+
+### Name
+
+${userInput.authorName}
+
+### GitHub
+
+${userInput.authorGitHub}
+
+### Email
+
+${userInput.authorEmail}
+
+### LinkedIn
+
+${userInput.authorLinkedIn}
+
+### Portfolio
+
+${userInput.authorPortfolio}
+
+### About Author
+
+${userInput.authorAbout.trim()}
+    `;
+    }
 
     //Table of Contents Function Declaration                
-    function generateToC(userInput) {
-        return `## Table of Contents\n
-        1. [About](#about)
-        2. [Features](#features)
-        3. [Media](#media)
-        4. [Documentation](#documentation)
-            1. [Installation](#installation)
-            2. [Dependencies](#dependencies)
-            3. [Getting Started](#usage)
-            4. [Frequently Asked Questions](#faq)
-            5. [Tests](#tests)
-        5. [Plans for Future Development](#future)
-        6. [Report Issues](#issues)
-            7. [How to Contribute](#contribute)
-            8. [License](#license)
-            9. [Author](#author)`;
+    function generateToC() {
+        return `
+## Table of Contents
+
+[About](#about)
+[Features](#features)
+[Installation](#installation)
+[Dependencies](#dependencies)
+[Getting Started](#usage-getting-started)
+[Frequently Asked Questions](#frequently-asked-questions)
+[Tests](#tests)
+[Plans for Future Development](#plans-for-future-development)
+[Report Issues](#report-issues)
+[How to Contribute](#how-to-contribute)
+[License](#license)
+[About the Author](#about-the-author)
+`;
     }
 
 

@@ -1,112 +1,110 @@
-# as
 
-        sadasd
+# dasdjnaskdjaksd
 
-        [![License](https://img.shields.io/badge/License-Apache-blue.svg)](#) 
+![License Badge](https://img.shields.io/badge/License-MIT-blue.svg)
 
-        ## Table of Contents
+## Table of Contents
 
-        1. [About](#about)
-        2. [Features](#features)
-        3. [Media](#media)
-        4. [Documentation](#documentation)
-            1. [Installation](#installation)
-            2. [Dependencies](#dependencies)
-            3. [Getting Started](#usage)
-            4. [Frequently Asked Questions](#faq)
-            5. [Tests](#tests)
-        5. [Plans for Future Development](#future)
-        6. [Report Issues](#issues)
-            7. [How to Contribute](#contribute)
-            8. [License](#license)
-            9. [Author](#author)
+[Description](#description)
+[About](#about)
+[Features](#features)
+[Installation](#installation)
+[Dependencies](#dependencies)
+[Getting Started](#usage-getting-started)
+[Frequently Asked Questions](#frequently-asked-questions)
+[Tests](#tests)
+[Plans for Future Development](#plans-for-future-development)
+[Report Issues](#report-issues)
+[How to Contribute](#how-to-contribute)
+[License](#license)
+[About the Author](#about-the-author)
 
-        ## Description
 
-        ### About
+## Description
 
-        adasdasd
+### About
 
-        ### Features
+laslkdmaslkdmsalkdm
 
-        hjhjhj
+### Features
 
-        ### Watch as in Action
+aslkdmsaldkmsakld
 
-        ![Media](ssacszc)
+### Watch dasdjnaskdjaksd in Action
 
-        ## Documentation
+![App Screenshot/Demo]sadkmasldkmaslkdmlasmd
 
-        ### Installation
+## Documentation
 
-        asdsadas
+### Installation
 
-        ### Dependencies
+asdkmasldkmaslkdmasld
 
-        fs, Express
-        SKIP
+### Dependencies
 
-        ### Usage: Getting Started
+fs, Express, React, Inquirer, Mongooseskip
 
-        asdasdsad
+### Usage: Getting Started
 
-        ### Frequently Asked Questions
+askjnaskjc
 
-        Q: Please
-A: Thank you
+## Frequently Asked Questions
 
-Q: Why
-A: I beg you
+Q: 
+A: 
 
-Q: I want to sleep tonight
-A: Ok
+Q: 
+A: 
 
-        ### Tests
+Q: 
+A:
 
-        SKIP
-        undefined
+## Tests
 
-        ## Plans for Future Development
+skip
 
-        Nine
+undefined
 
-        ## Report Issues
+## Plans for Future Development
 
-        asdsd
+sjnksajnskajcn
 
-        ## How to Contribute
+## Report Issues
 
-        sadasdas
+sksalckmalskcmsac
 
-        ## License
+## How to Contribute
 
-        Licensed under Apache
- https://choosealicense.com/licenses/Apache
+aslkmslakcm
 
-        ## Author
+## License
 
-        ### Name
+Licensed under MIT
+ https://choosealicense.com/licenses/MIT
 
-        Heidi
+## About the Author
 
-        ### GitHub
+### Name
 
-        asdasdsad
+heidi
 
-        ### Email
+### GitHub
 
-        fdsfasfdsfdsf
+sldnaslkclsaknc
 
-        ### LinkedIn
+### Email
 
-        AAAAAA
+sacnaslkslakn
 
-        ### Portfolio
+### LinkedIn
 
-        dvdfsd
+salckaslkcmaslkcm
 
-        ### About Author
+### Portfolio
 
-        cvcvbcv
+aslkcmsalkcmsalkcm
 
-        
+### About Author
+
+aslckmaslkcmlakcmaslc
+    
