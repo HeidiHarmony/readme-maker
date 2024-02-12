@@ -2,7 +2,7 @@
 
 The Burninatornno
 
-![License Badge](https://img.shields.io/badge/License-GNU-blue.svg)
+![License Badge](https://img.shields.io/badge/License-Unlicense-blue.svg)
 
 ## Table of Contents
 
@@ -39,11 +39,11 @@ Smoke, Fire, Wings, Angry Eyebrows, and a Big Beefy Arm (for good measure)
 
 ### Installation
 
-To install, type strongbad_email.exe from the command line.
+To install, type strongbad_email.exe in the terminal.
 
 ### Dependencies
 
- + SKIP
+None + skip
 
 ### Usage: Getting Started
 
@@ -68,11 +68,11 @@ Email me at(strongbad@homestarrunner.com)
 
 ## How to Contribute
 
-Post your dragon drawings on Instagram and tag #Trogdor and #Strongbad
+Post your dragon drawings on Instagram and tag #trogdor and #strongbad
 
 ## License
 
-Licensed under [GNU](https://choosealicense.com/licenses/GNU)
+Licensed under [Unlicense](https://choosealicense.com/licenses/Unlicense)
 
 ## About the Author
 

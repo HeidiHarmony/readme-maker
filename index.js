@@ -60,12 +60,12 @@ function displayLicenseDescription(licenseType) {
 
     return `# ${userInput.appName}
 
-${userInput.tagline}nno
+${userInput.tagline}
 
 ![License Badge](${licenseBadge})
 ${generateToC()}
 
-${userInput.link}
+(${userInput.link})
 
 ## Description
 
@@ -79,7 +79,7 @@ ${userInput.features}
 
 ### Check out ${userInput.appName} in Action
 
-![App Screenshot/Demo](${userInput.media})
+![Screenshot/Demo](${userInput.media})
 
 ## Documentation
 
