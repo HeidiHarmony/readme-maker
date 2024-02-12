@@ -62,7 +62,7 @@ Currently working on a new module that lets you release your Trogdor dragon into
 
 ## Report Issues
 
-Email me at (strongbad@homestarrunner.com)
+[Email me at](strongbad@homestarrunner.com)
 
 ## How to Contribute
 
@@ -84,7 +84,7 @@ Ask-StrongBad
 
 ### Email
 
-(strongbad@homestarrunner.com)
+[Email](strongbad@homestarrunner.com)
 
 ### LinkedIn
 
@@ -92,7 +92,7 @@ n/a
 
 ### Portfolio
 
-[s;alc,a;slc,acl;](https://homestarrunner.com/sbemails)
+[Portfolio](https://homestarrunner.com/sbemails)
 
 ### About Author
 
