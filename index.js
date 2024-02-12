@@ -50,7 +50,14 @@ function displayLicenseDescription(licenseType) {
         }
         console.log('Include Test Frameworks:', includeTestFrameworks, 'Include this testing info in readme: ', readmeTesting);
 
+        var commonDependencies = userInput.dependenciesCommon;
         var otherDependencies = userInput.dependenciesOther;
+        if (commonDependencies === 'None') {
+            
+            commonDependencies = 'None';
+        } else {
+            commonDependencies = userInput.dependenciesCommon.join(', ');
+        }
         if (otherDependencies.toLowerCase() !== 'skip') {
             otherDependencies = userInput.dependenciesOther;
         } else {
@@ -89,7 +96,8 @@ ${userInput.installation}
 
 ### Dependencies
 
-${userInput.dependenciesCommon} + ${userInput.dependenciesOther}
+${userInput.dependenciesCommon}
+${otherDependencies}
 
 ### Usage: Getting Started
 
@@ -155,17 +163,17 @@ function generateToC(includeTestFrameworks) {
     return `
 ## Table of Contents
 
-[About](#about)
-[Features](#features)
-[Installation](#installation)
-[Dependencies](#dependencies)
-[Getting Started](#usage-getting-started)
-[Frequently Asked Questions](#frequently-asked-questions)
-${testSection}
-[Plans for Future Development](#plans-for-future-development)
-[Report Issues](#report-issues)
-[How to Contribute](#how-to-contribute)
-[License](#license)
+[About](#about)  
+[Features](#features)  
+[Installation](#installation)  
+[Dependencies](#dependencies)  
+[Getting Started](#usage-getting-started)  
+[Frequently Asked Questions](#frequently-asked-questions)  
+${testSection}  
+[Plans for Future Development](#plans-for-future-development)  
+[Report Issues](#report-issues)  
+[How to Contribute](#how-to-contribute)  
+[License](#license)  
 [About the Author](#about-the-author)`;
     }
 
@@ -387,12 +395,11 @@ inquirer
         const licenseInfo = displayLicenseDescription(licenseType, userInput);
         const readme = generateReadme(userInput, licenseType, licenseInfo);
         
-        return { readme, outputDir: 'readme-maker-output' };
+        return { readme };
     });
 })
-.then(({ readme, outputDir }) => {
-    fs.mkdirSync(outputDir, { recursive: true });
-    fs.writeFile(`${outputDir}/README.md`, readme, (err) => {
+.then(({ readme }) => {
+    fs.writeFile(`README.md`, readme, (err) => {
         if (err) {
             console.error('An error occurred while writing the file:', err);
         } else {
