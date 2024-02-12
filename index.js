@@ -50,11 +50,11 @@ function displayLicenseDescription(licenseType) {
         }
         console.log('Include Test Frameworks:', includeTestFrameworks, 'Include this testing info in readme: ', readmeTesting);
 
-        var otherDependencies = null;
-        if (userInput.dependenciesOther.toLowerCase() !== 'skip') {
+        var otherDependencies = userInput.dependenciesOther;
+        if (otherDependencies.toLowerCase() !== 'skip') {
             otherDependencies = userInput.dependenciesOther;
         } else {
-            otherDependencies = null;
+            otherDependencies = '';
         }
         console.log('Other Dependencies:', otherDependencies);
 
@@ -64,6 +64,8 @@ ${userInput.tagline}nno
 
 ![License Badge](${licenseBadge})
 ${generateToC()}
+
+${userInput.link}
 
 ## Description
 
@@ -75,7 +77,7 @@ ${userInput.about}
 
 ${userInput.features}
 
-### Watch ${userInput.appName} in Action
+### Check out ${userInput.appName} in Action
 
 ![App Screenshot/Demo](${userInput.media})
 
@@ -195,13 +197,13 @@ var promptsToUser = [
 },
 //About
 {
-    type: 'input',
+    type: 'editor',
     name: 'about',
     message: 'What is your application about? What probem does it solve? What is its purpose?',
 },
 //Features
 {
-    type: 'input',
+    type: 'editor',
     name: 'features',
     message: 'What are the main features of your application?',
 },
