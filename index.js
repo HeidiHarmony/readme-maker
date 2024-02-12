@@ -77,7 +77,7 @@ ${userInput.features}
 
 ### Watch ${userInput.appName} in Action
 
-![App Screenshot/Demo]${userInput.media}
+![App Screenshot/Demo](${userInput.media})
 
 ## Documentation
 
@@ -125,15 +125,15 @@ ${userInput.authorGitHub}
 
 ### Email
 
-${userInput.authorEmail}
+(${userInput.authorEmail})
 
 ### LinkedIn
 
-${userInput.authorLinkedIn}
+(${userInput.authorLinkedIn})
 
 ### Portfolio
 
-${userInput.authorPortfolio}
+(${userInput.authorPortfolio})
 
 ### About Author
 

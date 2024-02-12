@@ -31,7 +31,7 @@ Smoke, Fire, Wings, Angry Eyebrows, and a Big Beefy Arm (for good measure)
 
 ### Watch nkdjnskjs in Action
 
-![App Screenshot/Demo]dragon-demo.png
+![App Screenshot/Demo](dragon-demo.png)
 
 ## Documentation
 
@@ -62,7 +62,7 @@ Currently working on a new module that lets you release your Trogdor dragon into
 
 ## Report Issues
 
-Email me at strongbad@homestarrunner.com.
+Email me at (strongbad@homestarrunner.com)
 
 ## How to Contribute
 
@@ -84,7 +84,7 @@ Ask-StrongBad
 
 ### Email
 
-strongbad@homestarrunner.com
+(strongbad@homestarrunner.com)
 
 ### LinkedIn
 

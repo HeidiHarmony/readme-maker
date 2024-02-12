@@ -31,7 +31,7 @@ sckajsascn
 
 ### Watch nkdjnskjs in Action
 
-![App Screenshot/Demo]cnkjakjascjnacj
+![App Screenshot/Demo]temp-test.png
 
 ## Documentation
 
