@@ -15,9 +15,13 @@
 
 ## About
 
-- What is it?
-- Why use README-Maker (What problem does it solve)
+- What is it? README-Maker is a simple command line application that assembles a professional README.md document by answering a few standard questions
+- 
+- Why use README-Maker?
+- Save time with README-Maker! You won’t need to save a separate template document, refer to other readmes, figure out how to add a badge, or even remember everything you want to include in your readme! README-Maker is like a wizard, guiding you step by step, and then whips up your document in seconds.
+- 
 - How README-Maker Works
+- README-Maker merges your answers you provide with terminal prompts
 - What I learned along the way
 - Tools and References
     Bootcamp Xpert
