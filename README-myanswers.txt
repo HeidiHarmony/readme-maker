@@ -39,7 +39,8 @@ Inquirer, FS
 
 ### Getting Started
 Once you have performed the necessary installation, gather your thoughts and files. 
-Make sure you have saved a screenshot or video file of your application in the root directory. It is recommended to keep some notes throughout work on your project about things you want to include as they come to mind, which will save you time later. Once your readme has been generated, don't forget to move it out of the output folder and into your root directory to make it easy to locate for your users.
+Make sure you have saved a screenshot or video file of your application in the root directory. To begin creating your readme, run 'node index.js' from the command line from within the README-Maker root directory.
+It is recommended to keep some notes throughout work on your project about things you want to include as they come to mind, which will save you time later. Once your readme has been generated, don't forget to move it out of the output folder and into your root directory to make it easy to locate for your users.
 
 ## Frequently Asked Questions
 
