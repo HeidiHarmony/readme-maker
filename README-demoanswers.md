@@ -13,7 +13,7 @@ https://youtu.be/90X5NJleYJQ?si=DG12PkxkHltoFAxb
 
 ### About
 
-DRAGON is here to help your child show off their skils of an artist! Follow along with my simple step-by-step instructions. I make drawing FUN! If you know your letters S and V and what a few body parts look like, you'll have a dragon in no time!
+DRAGON is here to help you show off your skils of an artist! Follow along with my simple step-by-step instructions. I make drawing FUN! If you know your letters S and V and what a few body parts look like, you'll have a dragon in no time!
 
 
 ### Features

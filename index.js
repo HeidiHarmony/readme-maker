@@ -53,18 +53,28 @@ function displayLicenseDescription(licenseType) {
         var commonDependencies = userInput.dependenciesCommon;
         var otherDependencies = userInput.dependenciesOther;
         if (commonDependencies === 'None') {
-            
-            commonDependencies = 'None';
+            commonDependencies = '';
         } else {
             commonDependencies = userInput.dependenciesCommon.join(', ');
         }
-        if (otherDependencies.toLowerCase() !== 'skip') {
-            otherDependencies = userInput.dependenciesOther;
-        } else {
+        if (otherDependencies.toLowerCase() === 'skip') {
             otherDependencies = '';
+        } else {
+            otherDependencies = userInput.dependenciesOther;
         }
+        console.log('Common Dependencies:', commonDependencies);
         console.log('Other Dependencies:', otherDependencies);
 
+        var allDependencies = commonDependencies + otherDependencies;
+        if (commonDependencies === '' && otherDependencies === '') {
+            allDependencies = '';
+        } else {
+            allDependencies = `### Dependencies
+            ${commonDependencies} ${otherDependencies}`;
+        }
+        console.log('All Dependencies:', allDependencies);
+
+    //The templtate literal for the README file
     return `# ${userInput.appName}
 
 ${userInput.tagline}
@@ -94,10 +104,7 @@ ${userInput.features}
 
 ${userInput.installation}
 
-### Dependencies
-
-${userInput.dependenciesCommon}
-${otherDependencies}
+${allDependencies}
 
 ### Usage: Getting Started
 
@@ -146,10 +153,8 @@ ${userInput.authorGitHub}
 (${userInput.authorPortfolio})
 
 ### About Author
-
-${userInput.authorAbout.trim()}
-`;
-    }
+${userInput.authorAbout}`;
+        } 
 
 //Table of Contents Function Declaration                
 function generateToC(includeTestFrameworks) {
@@ -157,7 +162,7 @@ function generateToC(includeTestFrameworks) {
     if (includeTestFrameworks === true) {
         testSection = '[Tests](#tests)';
     } else {
-        testSection = null;
+        testSection = '';
     }
     console.log('Test Section:', testSection);
     return `
