@@ -43,7 +43,7 @@ function displayLicenseDescription(licenseType) {
         var includeTestFrameworks = false;
         var readmeTesting = '';
         
-        if (userInput.testFrameworks() !== '') {
+        if (userInput.testFrameworks !== '') {
             includeTestFrameworks = true;
             readmeTesting = `\n### Tests\n${userInput.testFrameworks}\n${userInput.tests}\n`;
         }
@@ -168,7 +168,8 @@ ${userInput.authorPortfolio}
 
 ${userInput.authorAbout}
 `;
-        } 
+        }
+    } 
 
 //Table of Contents Function Declaration                
 function generateToC(includeTestFrameworks) {
@@ -419,7 +420,7 @@ inquirer
         const licenseInfo = displayLicenseDescription(licenseType, userInput);
         const readme = generateReadme(userInput, licenseType, licenseInfo);
         
-        return { readme };
+        return readme = { readme };
     });
 })
 
@@ -431,4 +432,4 @@ inquirer
             console.log('Your README file has been written successfully!');
         }
     });
-})}
+});
