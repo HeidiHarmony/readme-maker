@@ -40,40 +40,46 @@ function displayLicenseDescription(licenseType) {
 
         const licenseBadge = "https://img.shields.io/badge/License-" + licenseType + "-blue.svg"
 
-        var includeTestFrameworks = true; 
+        var includeTestFrameworks = true;
+        var readmeTesting = '';
+        
         if (userInput.testFrameworks.toLowerCase() === 'skip') {
             includeTestFrameworks = false;
-           var readmeTesting = '';
         } else {
-            includeTestFrameworks = true;
-            readmeTesting = `### Tests \n${userInput.testFrameworks}\n${userInput.tests}`;
+            readmeTesting = `### Tests\n${userInput.testFrameworks}\n${userInput.tests}`;
         }
-        console.log('Include Test Frameworks:', includeTestFrameworks, 'Include this testing info in readme: ', readmeTesting);
-
+        
+        console.log('Include Test Frameworks:', includeTestFrameworks, 'Include this testing info in readme:', readmeTesting);
+        
         var commonDependencies = userInput.dependenciesCommon;
         var otherDependencies = userInput.dependenciesOther;
+        
         if (commonDependencies === 'None') {
             commonDependencies = '';
         } else {
             commonDependencies = userInput.dependenciesCommon.join(', ');
         }
+        
         if (otherDependencies.toLowerCase() === 'skip') {
             otherDependencies = '';
         } else {
             otherDependencies = userInput.dependenciesOther;
         }
+        
         console.log('Common Dependencies:', commonDependencies);
         console.log('Other Dependencies:', otherDependencies);
-
-        var allDependencies = commonDependencies + otherDependencies;
-        if (commonDependencies === '' && otherDependencies === '') {
-            allDependencies = '';
-        } else {
-            allDependencies = `### Dependencies
-            ${commonDependencies} ${otherDependencies}`;
+        
+        var allDependencies = '';
+        
+        if (commonDependencies !== '' || otherDependencies !== '') {
+            allDependencies = `### Dependencies\n\n${commonDependencies} ${otherDependencies}`;
         }
+        
         console.log('All Dependencies:', allDependencies);
 
+        var tagline = userInput.tagline;
+        
+        
     //The templtate literal for the README file
     return `# ${userInput.appName}
 
@@ -82,7 +88,7 @@ ${userInput.tagline}
 ![License Badge](${licenseBadge})
 ${generateToC()}
 
-(${userInput.link})
+Find this app at ${userInput.link}
 
 ## Description
 
@@ -142,27 +148,27 @@ ${userInput.authorGitHub}
 
 ### Email
 
-(${userInput.authorEmail})
+${userInput.authorEmail}
 
 ### LinkedIn
 
-(${userInput.authorLinkedIn})
+${userInput.authorLinkedIn}
 
 ### Portfolio
 
-(${userInput.authorPortfolio})
+${userInput.authorPortfolio}
 
 ### About Author
-${userInput.authorAbout}`;
+
+${userInput.authorAbout}
+`;
         } 
 
 //Table of Contents Function Declaration                
 function generateToC(includeTestFrameworks) {
-    let testSection = null;
+    let testSection = '';
     if (includeTestFrameworks === true) {
         testSection = '[Tests](#tests)';
-    } else {
-        testSection = '';
     }
     console.log('Test Section:', testSection);
     return `
@@ -287,7 +293,7 @@ var promptsToUser = [
     name: 'testFrameworks',
     message: 'What frameworks have been used to test your application? (type SKIP to skip)',
     validate: function(input) {
-        if (input.toLowerCase() === 'skip') {
+        if (input.toLowerCase() === 'skip' || input === '') {
           return true; // Skip the question
         }
         return input !== '' || 'Please enter a value or "skip"';
@@ -394,7 +400,15 @@ inquirer
     const userInput = answers;
     console.log('User input has been collected:', userInput);
 
+    for (const key in userInput) {
+        if (typeof userInput[key] === 'string' && userInput[key].toLowerCase() === 'skip') {
+            userInput[key] = ''; // Reassigns the value to an empty string
+        }
+        console.log(`${key}: ${userInput[key]}`);
+    }
+
     return licenseTypeConstructor(userInput)
+
 .then((licenseType) => {
         console.log('The license type is:', licenseType);
         const licenseInfo = displayLicenseDescription(licenseType, userInput);
@@ -403,6 +417,7 @@ inquirer
         return { readme };
     });
 })
+
 .then(({ readme }) => {
     fs.writeFile(`README.md`, readme, (err) => {
         if (err) {
