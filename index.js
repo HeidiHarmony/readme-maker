@@ -424,13 +424,11 @@ inquirer
 })
 
 .then(({ readme }) => {
-    fs.writeFile(`README.md`, readme, (err) => {
+   fs.writeFileSync(`README.md`, readme, (err) => {
         if (err) {
             console.error('An error occurred while writing the file:', err);
         } else {
             console.log('Your README file has been written successfully!');
         }
     });
-}).catch((error) => {
-    console.error('An error occurred:', error);
-});}
+})}
