@@ -1,4 +1,4 @@
-# dsfdsf
+# mmmmmmmmmmmmmmmmmm
 
 
 
@@ -12,26 +12,25 @@
 [Dependencies](#dependencies)  
 [Getting Started](#usage-getting-started)  
 [Frequently Asked Questions](#frequently-asked-questions)  
-  
 [Plans for Future Development](#plans-for-future-development)  
 [Report Issues](#report-issues)  
 [How to Contribute](#how-to-contribute)  
 [License](#license)  
 [About the Author](#about-the-author)
 
-Find this app at (www.google.com)
+Find this app at www.icry.com
 
 ## Description
 
 ### About
 
-sadsasad
+ibubuhbyuhbuhb
 
 ### Features
 
-dsfdsfdsf
+hjbiubibnihn
 
-### Check out dsfdsf in Action
+### Check out mmmmmmmmmmmmmmmmmm in Action
 
 ![Screenshot/Demo](temp-test.png)
 
@@ -39,15 +38,15 @@ dsfdsfdsf
 
 ### Installation
 
-afdafdaf
-
+kkkkkkkkkkkk
 ### Dependencies
 
 None 
 
+
 ### Usage: Getting Started
 
-ydfudabfyudsbfdsf
+jgjgjgjgjg
 
 ## Frequently Asked Questions
 
@@ -57,20 +56,18 @@ Q:
 A:
 Q:
 A:
-### Tests
 
-undefined
 ## Plans for Future Development
 
-dhfiusadibsaud
+jjjj
 
 ## Report Issues
 
-djfsaiudnsida
+jnjn
 
 ## How to Contribute
 
-osandosandsaod
+fxdfxcdf
 
 ## License
 
@@ -80,23 +77,24 @@ Licensed under [MIT](https://choosealicense.com/licenses/MIT)
 
 ### Name
 
-sadhbsayudbsa
+knjn
 
 ### GitHub
 
-sadbsaiubdisa
+yvyvu
 
 ### Email
 
-(sjdnaiunda)
+vybuin@gmail.com
 
 ### LinkedIn
 
-www.saidsaiud.org
+www.bummer.com
 
 ### Portfolio
 
-(saidjsaidjosaijd)
+www.waghhhh.com
 
 ### About Author
-sadsadad
+
+fjfjfjf

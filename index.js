@@ -40,13 +40,12 @@ function displayLicenseDescription(licenseType) {
 
         const licenseBadge = "https://img.shields.io/badge/License-" + licenseType + "-blue.svg"
 
-        var includeTestFrameworks = true;
+        var includeTestFrameworks = false;
         var readmeTesting = '';
         
-        if (userInput.testFrameworks.toLowerCase() === 'skip') {
-            includeTestFrameworks = false;
-        } else {
-            readmeTesting = `### Tests\n${userInput.testFrameworks}\n${userInput.tests}`;
+        if (userInput.testFrameworks() !== '') {
+            includeTestFrameworks = true;
+            readmeTesting = `\n### Tests\n${userInput.testFrameworks}\n${userInput.tests}\n`;
         }
         
         console.log('Include Test Frameworks:', includeTestFrameworks, 'Include this testing info in readme:', readmeTesting);
@@ -60,30 +59,40 @@ function displayLicenseDescription(licenseType) {
             commonDependencies = userInput.dependenciesCommon.join(', ');
         }
         
-        if (otherDependencies.toLowerCase() === 'skip') {
-            otherDependencies = '';
-        } else {
+        if (otherDependencies.toLowerCase() !== '') {
             otherDependencies = userInput.dependenciesOther;
+        } else {
+            otherDependencies = null;
         }
         
         console.log('Common Dependencies:', commonDependencies);
         console.log('Other Dependencies:', otherDependencies);
         
         var allDependencies = '';
-        
-        if (commonDependencies !== '' || otherDependencies !== '') {
-            allDependencies = `### Dependencies\n\n${commonDependencies} ${otherDependencies}`;
+        if (otherDependencies !== null) {
+            allDependencies = {commonDependencies, otherDependencies};
+        } else {
+            allDependencies = `\n### Dependencies\n\n${commonDependencies}\n`;
+        }
+
+        if (commonDependencies === '' && otherDependencies === null) {
+            allDependencies = '';
         }
         
-        console.log('All Dependencies:', allDependencies);
+
+        console.log('Common Dependencies:', commonDependencies, 
+        'Other Dependencies:', otherDependencies, 
+        'All Dependencies:', allDependencies);
+
 
         var tagline = userInput.tagline;
+        if (tagline !== '') {
+
+        tagline = `\n${tagline}\n`;
         
         
     //The templtate literal for the README file
-    return `# ${userInput.appName}
-
-${userInput.tagline}
+    return `# ${userInput.appName}${tagline}
 
 ![License Badge](${licenseBadge})
 ${generateToC()}
@@ -108,9 +117,7 @@ ${userInput.features}
 
 ### Installation
 
-${userInput.installation}
-
-${allDependencies}
+${userInput.installation}${allDependencies}
 
 ### Usage: Getting Started
 
@@ -118,8 +125,7 @@ ${userInput.usage}
 
 ## Frequently Asked Questions
 
-${userInput.faq.trim()}
-${readmeTesting}
+${userInput.faq.trim()}${readmeTesting}
 ## Plans for Future Development
 
 ${userInput.future}
@@ -168,7 +174,7 @@ ${userInput.authorAbout}
 function generateToC(includeTestFrameworks) {
     let testSection = '';
     if (includeTestFrameworks === true) {
-        testSection = '[Tests](#tests)';
+        testSection = '\n[Tests](#tests)\n';
     }
     console.log('Test Section:', testSection);
     return `
@@ -179,8 +185,7 @@ function generateToC(includeTestFrameworks) {
 [Installation](#installation)  
 [Dependencies](#dependencies)  
 [Getting Started](#usage-getting-started)  
-[Frequently Asked Questions](#frequently-asked-questions)  
-${testSection}  
+[Frequently Asked Questions](#frequently-asked-questions)${testSection}  
 [Plans for Future Development](#plans-for-future-development)  
 [Report Issues](#report-issues)  
 [How to Contribute](#how-to-contribute)  
@@ -202,7 +207,7 @@ var promptsToUser = [
     name: 'tagline',
     message: 'What is your application\'s tagline or flavor text? (type SKIP to skip):',
     validate: (input) => {
-        if (input.toLowerCase() === 'skip') {
+        if (input.toLowerCase() === '') {
             return true; // Skip the question
         }
         return input !== '' || 'Please enter a value or "skip"';
@@ -268,7 +273,7 @@ var promptsToUser = [
     name: 'dependenciesOther',
     message: 'Please list any other dependencies you have: (type SKIP to skip)',
     validate: function (input) {
-        if (input.toLowerCase() === 'skip') {
+        if (input.toLowerCase() === '') {
           return true; // Skip the question
         }
         return input !== '' || 'Please enter a value or "skip"';
@@ -293,7 +298,7 @@ var promptsToUser = [
     name: 'testFrameworks',
     message: 'What frameworks have been used to test your application? (type SKIP to skip)',
     validate: function(input) {
-        if (input.toLowerCase() === 'skip' || input === '') {
+        if (input.toLowerCase() === '') {
           return true; // Skip the question
         }
         return input !== '' || 'Please enter a value or "skip"';
@@ -307,7 +312,7 @@ var promptsToUser = [
         return answers.testFrameworks.toLowerCase() !== 'skip';
     },
     validate: function(value) {
-        if (value.length || value.toLowerCase() === 'skip') {
+        if (value.length || value.toLowerCase() === '') {
             return true;
         } else {
             return 'Please enter a value or "skip"';
@@ -402,7 +407,7 @@ inquirer
 
     for (const key in userInput) {
         if (typeof userInput[key] === 'string' && userInput[key].toLowerCase() === 'skip') {
-            userInput[key] = ''; // Reassigns the value to an empty string
+            userInput[key] = ''; // Reassigns the value of skip to an empty string
         }
         console.log(`${key}: ${userInput[key]}`);
     }
@@ -428,4 +433,4 @@ inquirer
     });
 }).catch((error) => {
     console.error('An error occurred:', error);
-});
+});}
