@@ -1,6 +1,4 @@
-# mmmmmmmmmmmmmmmmmm
-
-
+# fgfdfgdfg
 
 ![License Badge](https://img.shields.io/badge/License-MIT-blue.svg)
 
@@ -18,19 +16,19 @@
 [License](#license)  
 [About the Author](#about-the-author)
 
-Find this app at www.icry.com
+Find this app at sfd
 
 ## Description
 
 ### About
 
-ibubuhbyuhbuhb
+dfdsfdf
 
 ### Features
 
-hjbiubibnihn
+dfsdfdsdfsdfd
 
-### Check out mmmmmmmmmmmmmmmmmm in Action
+### Check out fgfdfgdfg in Action
 
 ![Screenshot/Demo](temp-test.png)
 
@@ -38,15 +36,15 @@ hjbiubibnihn
 
 ### Installation
 
-kkkkkkkkkkkk
+adsadsad
 ### Dependencies
 
-None 
+None
 
 
 ### Usage: Getting Started
 
-jgjgjgjgjg
+sdfsdfdsf
 
 ## Frequently Asked Questions
 
@@ -56,18 +54,17 @@ Q:
 A:
 Q:
 A:
-
 ## Plans for Future Development
 
-jjjj
+sfdsfdsf
 
 ## Report Issues
 
-jnjn
+dsfdsfdsf
 
 ## How to Contribute
 
-fxdfxcdf
+dfgdfgdfg
 
 ## License
 
@@ -77,24 +74,24 @@ Licensed under [MIT](https://choosealicense.com/licenses/MIT)
 
 ### Name
 
-knjn
+dfgdfg
 
 ### GitHub
 
-yvyvu
+dfgdfg
 
 ### Email
 
-vybuin@gmail.com
+dfgdfg
 
 ### LinkedIn
 
-www.bummer.com
+dfgdfg
 
 ### Portfolio
 
-www.waghhhh.com
+dfgdfg
 
 ### About Author
 
-fjfjfjf
+dfgdfg

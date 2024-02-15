@@ -39,7 +39,7 @@ function displayLicenseDescription(licenseType) {
     function generateReadme(userInput, licenseType, licenseInfo) {
 
         const licenseBadge = "https://img.shields.io/badge/License-" + licenseType + "-blue.svg"
-
+console.log('License Badge:', licenseBadge);
         var includeTestFrameworks = false;
         var readmeTesting = '';
         
@@ -52,7 +52,8 @@ function displayLicenseDescription(licenseType) {
         
         var commonDependencies = userInput.dependenciesCommon;
         var otherDependencies = userInput.dependenciesOther;
-        
+        console.log('Common Dependencies 1:', commonDependencies);
+        console.log('Other Dependencies 1:', otherDependencies);
         if (commonDependencies === 'None') {
             commonDependencies = '';
         } else {
@@ -62,20 +63,21 @@ function displayLicenseDescription(licenseType) {
         if (otherDependencies.toLowerCase() !== '') {
             otherDependencies = userInput.dependenciesOther;
         } else {
-            otherDependencies = null;
+            otherDependencies = '';
         }
         
-        console.log('Common Dependencies:', commonDependencies);
-        console.log('Other Dependencies:', otherDependencies);
+        console.log('Common Dependencies 2:', commonDependencies);
+        console.log('Other Dependencies 2:', otherDependencies);
         
         var allDependencies = '';
-        if (otherDependencies !== null) {
+        if (otherDependencies !== '') {
             allDependencies = {commonDependencies, otherDependencies};
+            console.log('All Dependencies:', allDependencies);
         } else {
             allDependencies = `\n### Dependencies\n\n${commonDependencies}\n`;
         }
 
-        if (commonDependencies === '' && otherDependencies === null) {
+        if (commonDependencies === '' && otherDependencies === '') {
             allDependencies = '';
         }
         
@@ -90,9 +92,12 @@ function displayLicenseDescription(licenseType) {
 
         tagline = `\n${tagline}\n`;
         
-        
+        console.log("returning tagline " + tagline);
     //The templtate literal for the README file
-    return `# ${userInput.appName}${tagline}
+   
+        
+}
+return `# ${userInput.appName}${tagline}
 
 ![License Badge](${licenseBadge})
 ${generateToC()}
@@ -168,7 +173,6 @@ ${userInput.authorPortfolio}
 
 ${userInput.authorAbout}
 `;
-        }
     } 
 
 //Table of Contents Function Declaration                
@@ -418,18 +422,17 @@ inquirer
 .then((licenseType) => {
         console.log('The license type is:', licenseType);
         const licenseInfo = displayLicenseDescription(licenseType, userInput);
-        const readme = generateReadme(userInput, licenseType, licenseInfo);
-        
-        return readme = { readme };
+        console.log('The license info is:', licenseInfo);
+        var readme = generateReadme(userInput, licenseType, licenseInfo);
+        console.log("readme data " + readme);
+        return readme; 
     });
 })
-
-.then(({ readme }) => {
-   fs.writeFileSync(`README.md`, readme, (err) => {
-        if (err) {
-            console.error('An error occurred while writing the file:', err);
-        } else {
-            console.log('Your README file has been written successfully!');
-        }
-    });
+.then((readme) => {
+    try {
+        fs.writeFileSync(`README.md`, readme);
+        console.log('Your README file has been written successfully!');
+    } catch (err) {
+        console.error('An error occurred while writing the file:', err);
+    }
 });
