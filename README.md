@@ -45,7 +45,8 @@ What makes README-Maker stand out?
 
 ### Check out README-Maker in Action
 
-![Screenshot/Demo](readme-maker-walkthrough.png)
+Demo video: (https://drive.google.com/file/d/1GVMoUc4w7fjqdp3cwYBZg9vwrJzb2YNd/view?usp=drive_link)
+![Demo image](readme-maker-walkthrough.png)
 
 ## Documentation
 
