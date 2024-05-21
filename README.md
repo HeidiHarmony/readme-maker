@@ -18,7 +18,7 @@ We save you time in creating your readme documentation so you can spend more tim
 [License](#license)  
 [About the Author](#about-the-author)
 
-Find this app at https://github.com/HeidiHarmony/readme-maker
+Find this app at <https://github.com/HeidiHarmony/readme-maker>
 
 ## Description
 
@@ -45,14 +45,14 @@ What makes README-Maker stand out?
 
 ### Check out README-Maker in Action
 
-Demo video: (https://drive.google.com/file/d/1GVMoUc4w7fjqdp3cwYBZg9vwrJzb2YNd/view?usp=drive_link)
+Demo video: (<https://drive.google.com/file/d/1GVMoUc4w7fjqdp3cwYBZg9vwrJzb2YNd/view?usp=drive_link>)
 ![Demo image](readme-maker-walkthrough.png)
 
 ## Documentation
 
 ### Installation
 
-First, Node.js needs to be downloaded and installed on your computer. Get Node at: (https://nodejs.org/en/download). Then install the Inquirer module inside of README-Maker's root directory from the command line by typing 'npm install inquirer'.
+First, Node.js needs to be downloaded and installed on your computer. Get Node at: (<https://nodejs.org/en/download>). Then install the Inquirer module inside of README-Maker's root directory from the command line by typing 'npm install inquirer'.
 
 ### Dependencies
 
@@ -67,7 +67,7 @@ Once you have performed the necessary installation, gather your thoughts and fil
 Q: What if I have something to add to the readme that isn't in one of the prompts?
 A: The easiest way to address this is to add your information into the readme once it has been generated. More customization options will be available in future updates.
 Q: What if I want my license badge to be a different color?
-A: In the generated readme, you can see that the badge is actually generated online using the license information you provide. At the end of the file name where it says '-blue' you can change that to be whatever color you like. See (https://shields.io/badges) for more information and customization options.
+A: In the generated readme, you can see that the badge is actually generated online using the license information you provide. At the end of the file name where it says '-blue' you can change that to be whatever color you like. See (<https://shields.io/badges>) for more information and customization options.
 Q: What if I want to financially support the developer as she goes through coding bootcamp as a single working mom?
 A: If you love README-Maker and want to help me continue to develop this application to its fullest, any financial contributions would be welcome! I have both Paypal and Venmo.
 
@@ -99,15 +99,16 @@ HeidiHarmony
 
 ### Email
 
-tenibrae@gmail.com
+<tenibrae@gmail.com>
 
 ### LinkedIn
 
-https://www.linkedin.com/in/heidi-carrier-dual-hemisphere/
+<https://www.linkedin.com/in/heidi-carrier-dual-hemisphere/>
 
 ### Portfolio
 
-https://heidiharmony.github.io/portfolio
+<https://heidiharmony.github.io/portfolio>
+(under construction!)
 
 ### About Author
 
